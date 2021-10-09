@@ -1,0 +1,49 @@
+This is just a quick guide for C syntax - Isaac Song
+
+Legend:
+"|"			: anything on the right is description of the code for the reader of this guide to understand this better
+{desc} 		: substitute desc with what it states to includ, e.g. {describe the function}
+ex_...		: ex indicates example names especially for variables or objects, feel free to substitute when using it	
+
+
+anything in code chunks on the right of "|" is notes to understand the code better
+
+
+Structs / Typedef
+	- a class like object
+	- structure is a user defined data type available in C
+	  that allows to combine data items of different kinds
+	- "typedef struct" instead of "struct" allows you to call
+	  the object ("namewithout having to specify "[type] [name]"
+	- struct name should be capitalized, e.g. Controller
+	
+	Syntax:
+		Struct
+			>
+			> // {struct name}
+			> // {struct def}
+			> struct Ex_name {
+			>   char ex_string[10]; 	// {description of what ex_string is used for} 		| ex_text is member string of ex_name of max length 10
+			> 	int ex_int; 			// {description of what ex_text is used for}		| ex_int is member int of ex_name
+			> 	bool ex_bool; 			// {description of what ex_bool is used for} 		| ex_bool is member boolean of ex_name
+			> 	float ex_float;			// {description of what ex_float is used for}		| ex_float is member float of ex_name
+			> };
+			>
+			> struct Ex_name Ex_object; // declare Ex_object of type ex_name 				| declare Ex_object of type Ex_name
+			> 
+			>
+		
+		Typedef Struct
+			> 
+			> // {struct name}
+			> // {struct def}
+			> typedef struct{
+			>   char ex_string[10]; 	// {description of what ex_string is used for} 		| ex_text is member string of ex_name of max length 10
+			> 	int ex_int; 			// {description of what ex_text is used for}		| ex_int is member int of ex_name
+			> 	bool ex_bool; 			// {description of what ex_bool is used for} 		| ex_bool is member boolean of ex_name
+			> 	float ex_float;			// {description of what ex_float is used for}		| ex_float is member float of ex_name
+			> } Ex_name;
+			> 
+			> Ex_name Ex_object; // declare Ex_object of type ex_name 						| declare Ex_object of type Ex_name
+
+

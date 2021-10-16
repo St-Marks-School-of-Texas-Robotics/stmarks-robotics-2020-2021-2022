@@ -1,0 +1,20 @@
+HOW TO SETUP ROBOT C AND HARDWARE
+
+
+Download RobotC IDE from (https://www.vexrobotics.com/robotc-vexedr-vexiq.html)
+
+RobotC:
+	1. Window -> Menu Level-> Super User
+		- unlocks many previously hidden features
+
+	2. Robot -> Debugger Window -> Datastream 
+		- opens a console where you can print to
+		- absolutely essential for classical debugging
+
+	3. (OPTIONAL) Robot -> Compile Target -> PC-Based Emulator
+		- allows running code locally without connecting to robot
+		- be sure to swtich back to robot when plugging into robot
+
+
+How to Flash Code to Robot:
+

@@ -2,7 +2,7 @@
 #define SMVEX_H
 
 #define X_AXIS true
-#define Y_AXIS false  
+#define Y_AXIS false
 
 typedef struct {
     bool left, right, up, down;
@@ -42,7 +42,7 @@ task main() {
 
     // user initialization
     init(c);
-    
+
     // main control loop
     while (true) {
         __update_controller(c);
@@ -59,7 +59,7 @@ void __update_controller(Controller *c) {
 
     c->btn5.up = vexRT[Btn5U] > 0;
     c->btn5.down = vexRT[Btn5D] > 0;
-    
+
     c->btn6.up = vexRT[Btn6U] > 0;
     c->btn6.down = vexRT[Btn6D] > 0;
 
@@ -96,7 +96,7 @@ void map_threshold(Joystick *j, bool axis, int threshold, int port) {
         value = j->y_axis;
         scale = j->y_scale;
     }
-    
+
     if (abs(value) > threshold) {
         motor[port] = (int)(value / abs(value) * 127 * scale);
     } else {
@@ -114,10 +114,10 @@ void drive_control_from_scaled(Joystick *j, int lport, int rport, float lscale, 
     if (y >= 0) {
         // forward
         motorlf_base = x < 0 ? 127 + x : 127;
-        motorrf_base = x < 0 ? 127 : 127 + x; 
+        motorrf_base = x < 0 ? 127 : 127 + x;
     } else {
         // reverse
-        motorlf_base = x < 0 ? 127 : 127 + x; 
+        motorlf_base = x < 0 ? 127 : 127 + x;
         motorrf_base = x < 0 ? 127 + x : 127;
     }
 

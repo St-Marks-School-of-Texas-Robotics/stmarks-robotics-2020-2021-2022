@@ -32,11 +32,14 @@ Structs/Typedefs		Class like object								#Struct
 
 Void Functions			Functions										#Func
 
+Datastream				Console, similar to print() or debug()			#Console
+
 
 
 
 
 Pointers																											(#Point)
+	
 	- a variable that "points" to the stored memory address instead of value
 	- saves memory and faster execution time
 	- allows compact code by bypassing any encapsulation issues by passing pointer as parameter
@@ -94,7 +97,9 @@ Pointers																											(#Point)
 
 
 
+
 Structs / Typedef																									(#Struct)
+	
 	- a class like object
 	- structure is a user defined data type available in C
 	  that allows to combine data items of different kinds
@@ -138,10 +143,15 @@ Structs / Typedef																									(#Struct)
 
 
 
+
 Functions																											(#Func)
+	
 	- standard def of functions
 	- encapsulation
 	- void functions typically
+	- pointers important
+		- pass in pointers
+		- update values of pointed to
 
 	Syntax:
 		"void"
@@ -158,6 +168,20 @@ Functions																											(#Func)
 			│  }
 			│  
 			│  Ex_name Ex_object; // declare Ex_object of type ex_name 						| declare Ex_object of type Ex_name
+
+
+
+
+Datastream																											(#Console)
+
+	- Console equivalent in Robot C
+	- Requires Expert or Super User (suggested)
+		- Window -> Menu Level-> Expert or Super User (suggested)
+		- Robot -> Debugger Window -> Datastream 
+
+	
+
+
 
 
 

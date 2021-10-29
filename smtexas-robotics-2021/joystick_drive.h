@@ -1,19 +1,62 @@
 #ifndef JOYSTICK_DRIVE_H // include guard
 #define JOYSTICK_DRIVE_H
 
-// void loop(Controller *c);
-// void __update_controller(Controller *c);
+// returns proportional equivalent of x in a to b for f to g
+float map(float x, float a, float b, float f, float g) {
+	// returns value from one range to another range
+	//
+	// PARAMS
+	//		x: value to map
+	// 		a: min for initial range
+	// 		b: max for initial range
+	// 		f: min for resultant range
+	// 		g: max for resultant range
 
-// void init(Controller *c);
+	// formula for ratio
+	return (f - g) * (x - a) / (b - a) + f;
+}
 
-void drive_control(Controller *c, int lport, int rport) {
-	Joystick *j = c->Left; // joystick
+// calculate angle of y/x with correct signs and catches corner cases
+float atan2(int y, int x) {
+	// returns angle of y/x
+	//
+	// PARAMS
+	//		 y: y in y/x
+  //		 x: x in y/x
+	//
+	// Note: unorthodox order of (y, x) bc of intentioanlly similarity with default func atan(y/x)
 
-	// general movement scaling
-  int x = j->x_axis * j->x_scale; // x value of movement [-127, 127]
-  int y = j->y_axis * j->y_scale; // y value of movement [-127, 127]
+	// result variable
+	long result;
 
-  // calculate the base (unscaled) values for the forward motor outputs
+	// avoid /0
+	if (x == 0) {
+		// pi rad when vertical
+		result = PI;
+	} else {
+		// arctan elsewise
+		result = atan(y/x);
+	}
+
+	// add pi when in 3rd 4th quadrant
+	return y < 0 ? result + PI : result;
+}
+
+
+// drive control with x and y values
+void joystick_drive(float x, float y, int lport, int rport) {
+	// move robot with magnitude and direction from x and y value of joystick
+	//
+	// PARAMS
+	// 		float x: pot x value
+	// 		float y: pot y value
+	// 		int lport: port num of left motor
+	// 		int rport: port num of right motor
+
+	writeDebugStreamLine("x: %d", x);
+	writeDebugStreamLine("y: %d", y);
+
+	// calculate the base (unscaled) values for the forward motor outputs
   float left_motor_base, right_motor_base; // right motor base power, left motor base power
 
   // motor directions (assuming 127, 127 top right)
@@ -21,35 +64,79 @@ void drive_control(Controller *c, int lport, int rport) {
   // if fowards
 
   float mag = sqrt(x * x + y * y); // magnitude of the vector
-  float bearing = x < 0 | y < 0 ? radiansToDegrees(atan(y/x)) + 180: radiansToDegrees(atan(y/x)); // direction of joystick relative to origin in degrees
 
-  if (y >= 0) {
-  		// assuming right = x positive
-      left_motor_base = mag * cos(bearing - 45); // max value if x is positive, else
-      right_motor_base = mag * sin(bearing - 45);
+	writeDebugStreamLine("mag: %d", mag);
+  float bearing = x < 0 | y < 0 ? atan2(y, x) : atan2(y, x); // direction of joystick relative to origin in degrees
 
-  } else {
-    // scale the motor outputs (throttle)
-    left_motor_base *= y / 128.0;
-    right_motor_base *= y / 128.0;
+  // offset vector by pi/4 degrees
+  left_motor_base = mag * cos(bearing - PI/4);
+  right_motor_base = mag * sin(bearing - PI/4);
 
-    // calculate the pivot (0 if no scale, > 0 if should scale)
-    float piv_scale = abs(y) > __PivThreshold ? 0.0 : 1.0-abs(y)/__PivThreshold;
 
-    // apply the pivot to calculate the final forward motor outputs
-    float motorlf_out = (1 - piv_scale) * motorlf_base + piv_scale * x;
-    float motorrf_out = (1 - piv_scale) * motorrf_base + piv_scale * -x;
+	writeDebugStreamLine("Left Motor: %d", left_motor_base);
+	writeDebugStreamLine("Right Motor: %d", right_motor_base);
+	writeDebugStreamLine("");
 
-    motor[lport] = (int)(motorlf_out * lscale);
-    motor[rport] = (int)(motorrf_out * rscale);
-	}
+	// set motor values (one motor should be negative
+  motor[lport] = -left_motor_base;
+  motor[rport] = right_motor_base;
 }
 
-// arduino equivalent mapping
-// returns proportional equivalent of x in a to b for f to g
-float map(float x, float a, float b, float f, float g) {
-	return (f - g) * (x - a) / (b - a) + f;
+void drive_control(Controller *c, int lport, int rport) {
+	// controls base movement with joystick
+	//
+	// PARAMS
+	// 		Controller *c: controller object with its values
+	// 		int lport: port num for left motor
+	// 		int rport: port num for right motor
+
+	Joystick *j = c->Left; // joystick
+
+	// general movement scaling
+  int x = j->x_axis * j->x_scale; // x value of movement [-127, 127]
+  int y = j->y_axis * j->y_scale; // y value of movement [-127, 127]
+
+  // move robot with joystick values
+  joystick_drive(x, y, lport, rport);
 }
 
+
+
+// testing the motor functions with basic movement controls
+void auto_drive_TEST(Controller *c, int lport, int rport) {
+	// tests basic outputs, used for testing
+	//
+	// PARAMS
+	//		 Controller *c: controller object with input values
+	// 		int lport: port num of left motor
+	//		 int rport: port num of right motor
+
+	writeDebugStreamLine("Moved Forwards");
+	joystick_drive(0, 127, lport, rport); // move straight
+	wait1Msec(1000); // keep moving straight for 5 secs
+	joystick_drive(0, 0, lport, rport); // move straight
+	wait1Msec(3000); // keep moving straight for 5 secs
+
+	writeDebugStreamLine("Moved Forwards Slower");
+	joystick_drive(0, 63, lport, rport); // moe straight but slower
+	wait1Msec(1000);
+	joystick_drive(0, 0, lport, rport); // move straight
+	wait1Msec(3000); // keep moving straight for 5 secs
+
+
+	writeDebugStreamLine("Spin");
+	joystick_drive(127, 0, lport, rport); // spin in place
+	wait1Msec(1000); //  for 3 secs
+	joystick_drive(0, 0, lport, rport); // move straight
+	wait1Msec(3000); // keep moving straight for 5 secs
+
+	writeDebugStreamLine("Turn");
+	joystick_drive(127*cos(PI/4), 127*sin(PI/4), lport, rport); // turn right
+	wait1Msec(1000); //  for 3 secs
+	joystick_drive(0, 0, lport, rport); // move straight
+	wait1Msec(3000); // keep moving straight for 5 secs
+
+	writeDebugStreamLine("motor test done");
+}
 
 #endif

@@ -1,11 +1,6 @@
 #ifndef CONTROLLER_H // include guard
 #define CONTROLLER_H
 
-// void loop(Controller *c);
-// void __update_controller(Controller *c);
-
-// void init(Controller *c);
-
 // struct Buttons
 typedef struct {
 		// 4 button groups [5-8]

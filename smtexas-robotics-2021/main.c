@@ -1,6 +1,15 @@
 // includes
-#include "controller.h"
-#include "joystick_drive.h" //joystick driving functions
+#include "controller.h" // controller object
+#include "joystick_drive.h" // joystick driving functions
+#include "lightpole.h" // lightpole operator
+#include "lift.h" // operate lift
+
+// PORTS
+// 		port 2: left motor
+//		port 3: right motor
+// 		port 5: pole servo
+// 		port 7: lift motor
+//		port 8:	claw motor
 
 // CONSTANTS
 #define BASE_DEFAULT_MULT 1 // default multiplier for base movement control
@@ -8,7 +17,7 @@
 
 
 // movement function, controls the overall movement of the robot
-void movement(Controller *c) {
+void movement(Controller *c, int lport, int rport) {
 	// moves robot
 	//
 	// PARAMS
@@ -28,7 +37,7 @@ void movement(Controller *c) {
 	}
 
 	// control the robot
-	drive_control(c, port2, port3);
+	drive_control(c, lport, rport);
 }
 
 // main function
@@ -49,12 +58,21 @@ task main(){
 	// TESTS - testing functionalities
 		// Base Movement Tests
 			// writeDebugStreamLine("instantiated");
-			// auto_drive_Test(c, 1, 2);
-			//writeDebugStreamLine("autodrive done");
+
+			// auto_drive_Test(c, port1, port2);
+			// pole_test(port5);
+			// lift_test(port7);
+			// claw_test(port8);
+
+			//writeDebugStreamLine("testing done");
+
 
 	// main control loop
 	while (true) {
 		__update_controller(c); // continuously update controller value
-		movement(c); // base robot movement
+		movement(c, port2, port3); // base robot movement
+		drop_light_pole(c, port5); // control light pole
+		operate_lift(c, port7); // operates the lift
+		operate_claw(c, port8); // operates the claw
 	}
 }

@@ -3,7 +3,8 @@
 #include "joystick_drive.h" //joystick driving functions
 
 // CONSTANTS
-#define PREC_MULT .3 // multiplier for precise movement control
+#define BASE_DEFAULT_MULT 1 // default multiplier for base movement control
+#define BASE_PREC_MULT 0.3 // multiplier for precise base movement control
 
 
 // movement function, controls the overall movement of the robot
@@ -16,14 +17,14 @@ void movement(Controller *c) {
 	// precise control when up button on right pad (btn8.up) is pressed
 	if (c->btn8.up) {
 		// multiply x,y joystick values by precise multiplier
-		c->Left->x_scale = PREC_MULT;
-		c->Left->y_scale = PREC_MULT;
+		c->Left->x_scale = BASE_PREC_MULT;
+		c->Left->y_scale = BASE_PREC_MULT;
 
 	// reset multiplier when not pressing btn
 	} else {
-		// reset multiplier to 1
-		c->Left->x_scale = 1;
-		c->Left->y_scale = 1;
+		// reset multiplier to the base default multiplier
+		c->Left->x_scale = BASE_DEFAULT_MULT;
+		c->Left->y_scale = BASE_DEFAULT_MULT;
 	}
 
 	// control the robot
@@ -36,10 +37,10 @@ task main(){
 		Controller _con;
 
 		Joystick _LJ, _RJ;
-		_LJ.x_scale = 1;
-		_LJ.y_scale = 1;
-		_RJ.x_scale = 1;
-		_RJ.y_scale = 1;
+		_LJ.x_scale = BASE_DEFAULT_MULT;
+		_LJ.y_scale = BASE_DEFAULT_MULT;
+		_RJ.x_scale = 1; // TODO -------------------------------------------------------------------
+		_RJ.y_scale = 1; // TODO -------------------------------------------------------------------
 
 		_con.Left = &_LJ;
 		_con.Right = &_RJ;

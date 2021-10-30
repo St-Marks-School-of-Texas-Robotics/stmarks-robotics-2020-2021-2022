@@ -51,7 +51,7 @@ void drop_light_pole(Controller *c, int pole_port) {
 			break;
 
 		case 1: // hole 1
-			motor[pole_port] = 60;
+			motor[pole_port] = 70;
 			break;
 
 		case 2: // hole 2

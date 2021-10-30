@@ -103,7 +103,7 @@ void drive_control(Controller *c, int lport, int rport) {
 
 
 // testing the motor functions with basic movement controls
-void auto_drive_TEST(Controller *c, int lport, int rport) {
+void auto_drive_test(Controller *c, int lport, int rport) {
 	// tests basic outputs, used for testing
 	//
 	// PARAMS

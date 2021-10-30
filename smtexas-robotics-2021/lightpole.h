@@ -64,7 +64,7 @@ void drop_light_pole(Controller *c, int pole_port) {
 	}
 }
 
-void pole_TEST(int pole_port) {
+void pole_test(int pole_port) {
 	writeDebugStreamLine("pole test start");
 
 	writeDebugStreamLine("Hole -Home");

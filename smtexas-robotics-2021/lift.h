@@ -44,7 +44,7 @@ void operate_claw(Controller *c, int claw_port) {
 }
 
 // test claw functionallity
-void lift_TEST(int lift_port) {
+void lift_test(int lift_port) {
 	// open close claw
 	// PARAMS
 	//		int lift_port: port number of lifting motor
@@ -69,7 +69,7 @@ void lift_TEST(int lift_port) {
 }
 
 // test claw functionallity
-void claw_TEST(int claw_port) {
+void claw_test(int claw_port) {
 	// open close claw
 	// PARAMS
 	//		int claw_port: port number of claw motor

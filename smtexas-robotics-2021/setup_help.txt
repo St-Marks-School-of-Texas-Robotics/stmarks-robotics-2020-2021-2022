@@ -9,7 +9,7 @@ RobotC:
 
 	2. Robot -> Debugger Window -> Datastream 
 		- opens a console where you can print to
-		- absolutely essential for classical debugging
+			- absolutely essential for classical debugging
 
 	3. (OPTIONAL) Robot -> Compile Target -> PC-Based Emulator
 		- allows running code locally without connecting to robot
@@ -17,4 +17,12 @@ RobotC:
 
 
 How to Flash Code to Robot:
+	1. Connect robot to computer with USB to USB
+	2. turn on robot
+	3. Download to Robot while on the "main.c" tab
+
+How to Connect Controller:
+	1. Plug Wireless USB sticks to both
+	2. Turn both robot and controller on
+	3. Wait till all the lights on both turn green
 

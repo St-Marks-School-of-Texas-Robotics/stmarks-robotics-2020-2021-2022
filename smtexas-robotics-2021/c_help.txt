@@ -5,9 +5,9 @@ Language is RobotC.
 This guide assumes that the reader has knowledge of some basic knowledge of programming.
 
 
-
-
-
+Note:
+NO TERNARY OPERATOR, too easy to make mistake (made that mistake already)
+USE += 1 TO INCREMENT, much more readable
 
 
 Legend:

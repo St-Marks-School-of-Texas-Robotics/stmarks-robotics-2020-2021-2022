@@ -24,5 +24,5 @@ How to Flash Code to Robot:
 How to Connect Controller:
 	1. Plug Wireless USB sticks to both
 	2. Turn both robot and controller on
-	3. Wait till all the lights on both turn green
+	3. Wait until all the lights on both turn green, could take 10+ secs
 

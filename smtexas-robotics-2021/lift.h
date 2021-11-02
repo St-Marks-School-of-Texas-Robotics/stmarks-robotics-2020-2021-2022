@@ -12,14 +12,22 @@ void operate_lift(Controller *c, int lift_port) {
 	// lift claw when button pressed
 	// 		right pad right button
 	if (c->btn8.right) {
-		pole_current_hole == 3 ? 3 : pole_current_hole++; // increment flag motor allignment to num hole, avoid exceeding 4
+		// light pole should not increment above 3
+		if (pole_current_hole < 3) {
+			pole_current_hole += 1; // increment flag motor allignment to num hole
+		}
+
 		drop_pressed = true; // set state to true to not call function until after another button release
 	}
 
 	// drop claw when button pressed
 	// 		right pad bottom button
 	else if (c->btn8.down) {
-		pole_current_hole == 0 ? 0 : pole_current_hole--; // decrement flag motor allignment to num hole, avoid exceeding 0
+		// light pole should not decrement below 0
+		if (pole_current_hole > 0) {
+			pole_current_hole += 1; // increment flag motor allignment to num holedrop_pressed = true; // set state to true to not call function until after another button release
+		}
+
 		drop_pressed = true; // set state to true to not call function until after another button release
 	}
 }

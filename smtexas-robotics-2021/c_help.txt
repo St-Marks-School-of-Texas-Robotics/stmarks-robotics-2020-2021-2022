@@ -23,8 +23,8 @@ anything in code chunks on the right of "|" is notes to understand the code bett
 
 Table of Contents (Cmnd/Ctrl + F key to jump to section)
 
-     Name 						Desc			  						  Key
-————————————————————————————————————————————————————————————————————————————————————
+     Name 						Desc			  					  Key
+——————————————————————————————————————————————————————————————————————————————————————————
 Pointers 				variable pointing to memory						#Point
 						(*var, &var)		
 
@@ -38,7 +38,7 @@ Datastream				Console, similar to print() or debug()			#Console
 
 
 
-Pointers																											(#Point)
+Pointers	(#Point)
 	
 	- a variable that "points" to the stored memory address instead of value
 	- saves memory and faster execution time

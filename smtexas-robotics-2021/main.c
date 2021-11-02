@@ -55,7 +55,7 @@ task main(){
 		_con.Right = &_RJ;
 		Controller *c = &_con;
 
-	// TESTS - testing functionalities
+	// TESTS - /\testing functionalities
 		// Base Movement Tests
 			// writeDebugStreamLine("instantiated");
 
@@ -72,7 +72,7 @@ task main(){
 		__update_controller(c); // continuously update controller value
 		movement(c, port2, port3); // base robot movement
 		drop_light_pole(c, port5); // control light pole
-		operate_lift(c, port7); // operates the lift
-		operate_claw(c, port8); // operates the claw
+		// operate_lift(c, port7); // operates the lift
+		// operate_claw(c, port8); // operates the claw
 	}
 }

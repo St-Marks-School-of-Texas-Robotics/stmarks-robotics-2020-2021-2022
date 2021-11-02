@@ -1,34 +1,45 @@
 #ifndef LIFT_H // include guard
 #define LIFT_H
 
+
+// CONSTANTS
+#define ARM_DEFAULT_POWER 0 // default power for arm
+#define ARM_UP_POWER 127 // default power for arm upwards
+#define ARM_DOWN_POWER 63 // default power for arm downwards
+#define ARM_DEFAULT_MULT 1 // default multiplier for arm control
+#define ARM_PREC_MULT 0.3 // multiplier for precise arm control
+
 // control motor to lift the claw
-void operate_lift(Controller *c, int lift_port) {
+void operate_arm(Controller *c, int arm_port) {
 	// [button] to go up, [button] to go down
 	//
 	// PARAMS
 	// 		Controller *c: Controller object to retrieve input values
 	//		int lift_port: port number of motor to lift claw
 
-	// lift claw when button pressed
-	// 		right pad right button
-	if (c->btn8.right) {
-		// light pole should not increment above 3
-		if (pole_current_hole < 3) {
-			pole_current_hole += 1; // increment flag motor allignment to num hole
-		}
+	float arm_mult; // multiplier for arm power
 
-		drop_pressed = true; // set state to true to not call function until after another button release
+	// turn on arm precision control when button pressed
+	// 		right button group left button
+	if (c->btn8.left) {
+		arm_mult = ARM_PREC_MULT; // set multiplier to precise
+	} else {
+		arm_mult = ARM_DEFAULT_MULT; // reset multiplier to default
 	}
 
-	// drop claw when button pressed
-	// 		right pad bottom button
-	else if (c->btn8.down) {
-		// light pole should not decrement below 0
-		if (pole_current_hole > 0) {
-			pole_current_hole += 1; // increment flag motor allignment to num holedrop_pressed = true; // set state to true to not call function until after another button release
-		}
+	// lift claw when left top bumper pressed
+	// 		group 5 up button
+	if (c->btn5.up) {
+		motor[arm_port] = ARM_UP_POWER * arm_mult; // motor power upwards
 
-		drop_pressed = true; // set state to true to not call function until after another button release
+	// lower claw when left bottom bumper pressed
+	// 		group 5 down button
+	} else if (c->btn5.down) {
+		motor[arm_port] = -ARM_DOWN_POWER * arm_mult; // motor power downwards
+
+	// passive motor power
+	} else {
+		motor[arm_port] = ARM_DEFAULT_POWER * arm_mult; // motor at default power
 	}
 }
 
@@ -51,29 +62,28 @@ void operate_claw(Controller *c, int claw_port) {
 		}
 }
 
-// test claw functionallity
-void lift_test(int lift_port) {
-	// open close claw
+// test arm functionallity
+void arm_test(int arm_port) {
+	// test arm movement
 	// PARAMS
 	//		int lift_port: port number of lifting motor
+ //---------------------------------------------------------------------------------------------------
 
-	return; //---------------------------------------------------------------------------------------------------
+	writeDebugStreamLine("arm test start");
 
-	writeDebugStreamLine("claw test start");
+	writeDebugStreamLine("arm up");
+	motor[arm_port] = 127;
+	wait1Msec(1000);
 
-	writeDebugStreamLine("Hole -Home");
-	motor[lift_port] = 307;
+	writeDebugStreamLine("arm stay");
+	motor[arm_port] = 0;
 	wait1Msec(5000);
 
-	writeDebugStreamLine("Hole Home");
-	motor[lift_port] = 127;
-	wait1Msec(2000);
+	writeDebugStreamLine("arm down");
+	motor[arm_port] = -63;
+	wait1Msec(500);
 
-	writeDebugStreamLine("Hole 1");
-	motor[lift_port] = 60;
-	wait1Msec(2000);
-
-	writeDebugStreamLine("claw test done");
+	writeDebugStreamLine("arm test done");
 }
 
 // test claw functionallity

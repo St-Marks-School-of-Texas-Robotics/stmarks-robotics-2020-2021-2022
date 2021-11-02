@@ -53,8 +53,8 @@ void joystick_drive(float x, float y, int lport, int rport) {
 	// 		int lport: port num of left motor
 	// 		int rport: port num of right motor
 
-	writeDebugStreamLine("x: %d", x);
-	writeDebugStreamLine("y: %d", y);
+	// writeDebugStreamLine("x: %d", x);
+	// writeDebugStreamLine("y: %d", y);
 
 	// calculate the base (unscaled) values for the forward motor outputs
   float left_motor_base, right_motor_base; // right motor base power, left motor base power
@@ -65,7 +65,7 @@ void joystick_drive(float x, float y, int lport, int rport) {
 
   float mag = sqrt(x * x + y * y); // magnitude of the vector
 
-	writeDebugStreamLine("mag: %d", mag);
+	// writeDebugStreamLine("mag: %d", mag);
   float bearing = x < 0 | y < 0 ? atan2(y, x) : atan2(y, x); // direction of joystick relative to origin in degrees
 
   // offset vector by pi/4 degrees
@@ -73,9 +73,9 @@ void joystick_drive(float x, float y, int lport, int rport) {
   right_motor_base = mag * sin(bearing - PI/4);
 
 
-	writeDebugStreamLine("Left Motor: %d", left_motor_base);
-	writeDebugStreamLine("Right Motor: %d", right_motor_base);
-	writeDebugStreamLine("");
+	// writeDebugStreamLine("Left Motor: %d", left_motor_base);
+	// writeDebugStreamLine("Right Motor: %d", right_motor_base);
+	// writeDebugStreamLine("");
 
 	// set motor values (one motor should be negative
   motor[lport] = -left_motor_base;

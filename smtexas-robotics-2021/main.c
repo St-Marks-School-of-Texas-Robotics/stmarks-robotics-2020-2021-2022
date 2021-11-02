@@ -12,9 +12,8 @@
 //		port 8:	claw motor
 
 // CONSTANTS
-#define BASE_DEFAULT_MULT 1 // default multiplier for base movement control
-#define BASE_PREC_MULT 0.3 // multiplier for precise base movement control
-
+#define BASE_DEFAULT_MULT 1 // default multiplier for base control
+#define BASE_PREC_MULT 0.3 // multiplier for precise base control
 
 // movement function, controls the overall movement of the robot
 void movement(Controller *c, int lport, int rport) {
@@ -61,7 +60,7 @@ task main(){
 
 			// auto_drive_Test(c, port1, port2);
 			// pole_test(port5);
-			// lift_test(port7);
+			//arm_test(port7);
 			// claw_test(port8);
 
 			//writeDebugStreamLine("testing done");
@@ -72,7 +71,7 @@ task main(){
 		__update_controller(c); // continuously update controller value
 		movement(c, port2, port3); // base robot movement
 		drop_light_pole(c, port5); // control light pole
-		operate_lift(c, port7); // operates the lift
-		operate_claw(c, port8); // operates the claw
+		operate_arm(c, port7); // operates the lift
+		//operate_claw(c, port8); // operates the claw
 	}
 }

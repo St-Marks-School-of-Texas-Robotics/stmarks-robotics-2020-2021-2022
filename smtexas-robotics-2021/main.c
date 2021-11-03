@@ -61,7 +61,7 @@ task main(){
 			// auto_drive_Test(c, port1, port2);
 			// pole_test(port5);
 			//arm_test(port7);
-			// claw_test(port8);
+			// claw_test(port8, port9);
 
 			//writeDebugStreamLine("testing done");
 
@@ -72,6 +72,6 @@ task main(){
 		movement(c, port2, port3); // base robot movement
 		drop_light_pole(c, port5); // control light pole
 		operate_arm(c, port7); // operates the lift
-		//operate_claw(c, port8); // operates the claw
+		operate_claw(c, port8, port9); // operates the claw
 	}
 }

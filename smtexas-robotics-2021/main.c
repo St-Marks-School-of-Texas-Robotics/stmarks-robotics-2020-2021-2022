@@ -1,38 +1,27 @@
-/* main.c
-Main Code for Demolition 2021 BEST Robotics
-St. Mark's Robotics Team
-
-for help, consult c_help.txt and setup_help.txt
-or contact Isaac Song at isaacsong03@gmail.com
-*/
-
-// INCLUDES
+// includes
 #include "controller.h" // controller object
 #include "joystick_drive.h" // joystick driving functions
 #include "lightpole.h" // lightpole operator
 #include "lift.h" // operate lift
-#include "autonomous.h" // autonomous portion
 
-// PORTS ASSIGNMENTS
-#define LEFT_MOTOR port2
-#define RIGHT_MOTOR port3
-#define POLE_SERVO port5
-#define ARM_MOTOR port7
-#define LEFT_CLAW_SERVO port8
-#define RIGHT_CLAW_SERVO port9
+// PORTS
+// 		port 2: left motor
+//		port 3: right motor
+// 		port 5: pole servo
+// 		port 7: lift motor
+//		port 8:	claw motor
 
 // CONSTANTS
-#define BASE_DEFAULT_MULT 1 // default multiplier for base control
-#define BASE_PREC_MULT 0.5 // multiplier for precise base control
+#define BASE_DEFAULT_MULT 1 // default multiplier for base movement control
+#define BASE_PREC_MULT 0.3 // multiplier for precise base movement control
+
 
 // movement function, controls the overall movement of the robot
-void movement(Controller *c, int left_port, int right_port) {
+void movement(Controller *c, int lport, int rport) {
 	// moves robot
 	//
 	// PARAMS
 	// 		Controller *c: controller object with input values
-	//		int left_port: left motor port number
-	// 		int right_port: right motor port number
 
 	// precise control when up button on right pad (btn8.up) is pressed
 	if (c->btn8.up) {
@@ -48,53 +37,42 @@ void movement(Controller *c, int left_port, int right_port) {
 	}
 
 	// control the robot
-	drive_control(c, left_port, right_port);
+	drive_control(c, lport, rport);
 }
 
 // main function
 task main(){
 	// controller initialization
-		// create controller objects
 		Controller _con;
 
-		// setup joystick
-		Joystick _LJ, _RJ; // create joystick object
-		_LJ.x_scale = BASE_DEFAULT_MULT; // base multiplier of left joystick x-values
-		_LJ.y_scale = BASE_DEFAULT_MULT; // base multiplier of left joystick y-values
-		_RJ.x_scale = 1; // base multiplier of right joystick x-values
-		_RJ.y_scale = 1; // base multiplier of right joystick y-values
+		Joystick _LJ, _RJ;
+		_LJ.x_scale = BASE_DEFAULT_MULT;
+		_LJ.y_scale = BASE_DEFAULT_MULT;
+		_RJ.x_scale = 1; // TODO -------------------------------------------------------------------
+		_RJ.y_scale = 1; // TODO -------------------------------------------------------------------
 
-		_con.Left = &_LJ; // attach left joystick to controller object
-		_con.Right = &_RJ; // attach right joystick to controller object
-		Controller *c = &_con; // create pointer to controller
+		_con.Left = &_LJ;
+		_con.Right = &_RJ;
+		Controller *c = &_con;
 
-	// --- TESTS - testing functionalities ---
-		// uncomment specific lines to test individual parts
-		// Base  Tests
-			//drive_test(c, LEFT_MOTOR, RIGHT_MOTOR);
+	// TESTS - /\testing functionalities
+		// Base Movement Tests
+			// writeDebugStreamLine("instantiated");
 
-		// Lightpole Servo Test
-			//pole_test(POLE_SERVO);
-
-		// Arm Movement Test
-			//arm_test(port7);
-
-		// Claw Test
-			//claw_test(port8, port9);
-
-		// Autonomous Test
-			//auto_run(port2, port3, port7, port8, port9);
+			// auto_drive_Test(c, port1, port2);
+			// pole_test(port5);
+			// lift_test(port7);
+			// claw_test(port8);
 
 			//writeDebugStreamLine("testing done");
 
-		//return;
+
 	// main control loop
 	while (true) {
-	  update_controller(c); // continuously update controller value
-		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
-		drop_light_pole(c, POLE_SERVO); // control light pole
-		operate_arm(c, ARM_MOTOR); // operates the lift
-		operate_claw(c, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // operates the claw
-		autonomous(c, LEFT_MOTOR, RIGHT_MOTOR, ARM_MOTOR, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // runs continuous on button press
+		__update_controller(c); // continuously update controller value
+		movement(c, port2, port3); // base robot movement
+		drop_light_pole(c, port5); // control light pole
+		// operate_lift(c, port7); // operates the lift
+		// operate_claw(c, port8); // operates the claw
 	}
 }

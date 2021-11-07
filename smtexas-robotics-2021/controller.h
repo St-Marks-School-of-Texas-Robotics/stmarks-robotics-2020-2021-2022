@@ -1,3 +1,8 @@
+/* controller.h
+instantiates controller structures
+Generic Code
+*/
+
 #ifndef CONTROLLER_H // include guard
 #define CONTROLLER_H
 
@@ -36,7 +41,7 @@ typedef struct {
 } Controller;
 
 // __update _controller
-void __update_controller(Controller *c) {
+void update_controller(Controller *c) {
   // updates controller with button and joystick values
 	//
   // PARAMS
@@ -71,4 +76,4 @@ void __update_controller(Controller *c) {
   c->btn8.right = vexRT[Btn8R] > 0;
 }
 
-#endif
+#endif // close guard

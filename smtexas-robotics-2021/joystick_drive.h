@@ -1,8 +1,3 @@
-/* joystick_drive.h
-Module to enbale movement controls with joystick
-Generic Code
-*/
-
 #ifndef JOYSTICK_DRIVE_H // include guard
 #define JOYSTICK_DRIVE_H
 
@@ -49,14 +44,14 @@ float atan2(int y, int x) {
 
 
 // drive control with x and y values
-void joystick_drive(float x, float y, int left_port, int right_port) {
+void joystick_drive(float x, float y, int lport, int rport) {
 	// move robot with magnitude and direction from x and y value of joystick
 	//
 	// PARAMS
 	// 		float x: pot x value
 	// 		float y: pot y value
-	// 		int left_port: port num of left motor
-	// 		int right_port: port num of right motor
+	// 		int lport: port num of left motor
+	// 		int rport: port num of right motor
 
 	// writeDebugStreamLine("x: %d", x);
 	// writeDebugStreamLine("y: %d", y);
@@ -83,17 +78,17 @@ void joystick_drive(float x, float y, int left_port, int right_port) {
 	// writeDebugStreamLine("");
 
 	// set motor values (one motor should be negative
-  motor[left_port] = -left_motor_base;
-  motor[right_port] = right_motor_base;
+  motor[lport] = -left_motor_base;
+  motor[rport] = right_motor_base;
 }
 
-void drive_control(Controller *c, int left_port, int right_port) {
+void drive_control(Controller *c, int lport, int rport) {
 	// controls base movement with joystick
 	//
 	// PARAMS
 	// 		Controller *c: controller object with its values
-	// 		int left_port: port num for left motor
-	// 		int right_port: port num for right motor
+	// 		int lport: port num for left motor
+	// 		int rport: port num for right motor
 
 	Joystick *j = c->Left; // joystick
 
@@ -102,45 +97,46 @@ void drive_control(Controller *c, int left_port, int right_port) {
   int y = j->y_axis * j->y_scale; // y value of movement [-127, 127]
 
   // move robot with joystick values
-  joystick_drive(x, y, left_port, right_port);
+  joystick_drive(x, y, lport, rport);
 }
 
 
+
 // testing the motor functions with basic movement controls
-void drive_test(Controller *c, int left_port, int right_port) {
+void auto_drive_test(Controller *c, int lport, int rport) {
 	// tests basic outputs, used for testing
 	//
 	// PARAMS
 	//		 Controller *c: controller object with input values
-	// 		 int left_port: port num of left motor
-	//		 int right_port: port num of right motor
+	// 		int lport: port num of left motor
+	//		 int rport: port num of right motor
 
 	writeDebugStreamLine("Moved Forwards");
-	joystick_drive(0, 127, left_port, right_port); // move straight
+	joystick_drive(0, 127, lport, rport); // move straight
 	wait1Msec(1000); // keep moving straight for 5 secs
-	joystick_drive(0, 0, left_port, right_port); // move straight
+	joystick_drive(0, 0, lport, rport); // move straight
 	wait1Msec(3000); // keep moving straight for 5 secs
 
 	writeDebugStreamLine("Moved Forwards Slower");
-	joystick_drive(0, 63, left_port, right_port); // moe straight but slower
+	joystick_drive(0, 63, lport, rport); // moe straight but slower
 	wait1Msec(1000);
-	joystick_drive(0, 0, left_port, right_port); // move straight
+	joystick_drive(0, 0, lport, rport); // move straight
 	wait1Msec(3000); // keep moving straight for 5 secs
 
 
 	writeDebugStreamLine("Spin");
-	joystick_drive(127, 0, left_port, right_port); // spin in place
+	joystick_drive(127, 0, lport, rport); // spin in place
 	wait1Msec(1000); //  for 3 secs
-	joystick_drive(0, 0, left_port, right_port); // move straight
+	joystick_drive(0, 0, lport, rport); // move straight
 	wait1Msec(3000); // keep moving straight for 5 secs
 
 	writeDebugStreamLine("Turn");
-	joystick_drive(127*cos(PI/4), 127*sin(PI/4), left_port, right_port); // turn right
+	joystick_drive(127*cos(PI/4), 127*sin(PI/4), lport, rport); // turn right
 	wait1Msec(1000); //  for 3 secs
-	joystick_drive(0, 0, left_port, right_port); // move straight
+	joystick_drive(0, 0, lport, rport); // move straight
 	wait1Msec(3000); // keep moving straight for 5 secs
 
 	writeDebugStreamLine("motor test done");
 }
 
-#endif // close guard
+#endif

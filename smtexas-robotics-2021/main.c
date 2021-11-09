@@ -6,6 +6,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 */
 
 // INCLUDES
+#include "helper.h" // helper functions
 #include "controller.h" // controller object
 #include "joystick_drive.h" // joystick driving functions
 #include "lightpole.h" // lightpole operator
@@ -69,8 +70,9 @@ task main(){
 
 	// --- TESTS - testing functionalities ---
 		// uncomment specific lines to test individual parts
+
 		// Base  Tests
-			//drive_test(c, LEFT_MOTOR, RIGHT_MOTOR);
+			//drive_test(LEFT_MOTOR, RIGHT_MOTOR);
 
 		// Lightpole Servo Test
 			//pole_test(POLE_SERVO);
@@ -78,7 +80,7 @@ task main(){
 		// Arm Movement Test
 			//arm_test(port7);
 
-		// Claw Test
+		//Claw Test
 			//claw_test(port8, port9);
 
 		// Autonomous Test
@@ -86,7 +88,18 @@ task main(){
 
 			//writeDebugStreamLine("testing done");
 
+		// Calculation Tests
+			// writeDebugStreamLine("(5, 0) : %f", atan2(5, 0));
+			// writeDebugStreamLine("(-5, 0): %f", atan2(-5, 0));
+			// writeDebugStreamLine("(0, 5) : %f", atan2(0, 5));
+			// writeDebugStreamLine("(0, -5): %f", atan2(0, 5));
+			//writeDebugStreamLine("map(-3, -10, 10, -10, 10): %f", map(-3, -10, 10, -10, 10));
+			// float mag = sqrt(x * x + y * y); // magnitude of the vector
+			// writeDebugStreamLine("mag: %d", mag);
+
 		//return;
+
+
 	// main control loop
 	while (true) {
 	  update_controller(c); // continuously update controller value

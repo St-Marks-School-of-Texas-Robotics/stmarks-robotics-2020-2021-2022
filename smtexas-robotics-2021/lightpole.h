@@ -38,9 +38,7 @@ void drop_light_pole(Controller *c, int pole_port) {
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
 	if (c->btn8.right  && drop_pressed == false) {
-		if (pole_current_hole < 3) {
-			pole_current_hole += 1; // increment flag motor allignment to num hole, avoid exceeding 4
-		}
+		pole_current_hole = min(3, pole_current_hole + 1); // increment flag motor allignment to num hole, avoid exceeding 3
 
 		drop_pressed = true; // set state to true to not call function until after another button release
 	}
@@ -48,9 +46,7 @@ void drop_light_pole(Controller *c, int pole_port) {
 	// rotate to prev  pole when button pressed for first time after release
 	// 		right pad bottom button
 	else if (c->btn8.down && undrop_pressed == false) {
-		if (pole_current_hole > 0) {
-			pole_current_hole -= 1; // decrement flag motor allignment to num hole, avoid exceeding 0
-		}
+		pole_current_hole = max(1, pole_current_hole - 1); // decrement flag motor allignment to num hole, avoid below 0
 
 		drop_pressed = true; // set state to true to not call function until after another button release
 	}

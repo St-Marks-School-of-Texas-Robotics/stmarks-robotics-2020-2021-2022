@@ -7,8 +7,8 @@ Generic Code
 #define JOYSTICK_DRIVE_H
 
 // CONSTANTS
-#define MOTOR_MAX 127 // maximum power of motor
-#define MOTOR_MIN -127 // minimum power of motor
+#define MOTOR_MAX 100 // maximum power of motor
+#define MOTOR_MIN -100 // minimum power of motor
 
 #define JOYSTICK_MAX 127 // maximum joystick value
 #define JOYSTICK_MIN -127 // minimum joystick value
@@ -23,49 +23,47 @@ void joystick_drive(float x, float y, int left_port, int right_port) {
 	// 		int left_port: port num of left motor
 	// 		int right_port: port num of right motor
 
-	// writeDebugStreamLine("x: %d", x);
-	// writeDebugStreamLine("y: %d", y);
-
-	// calculate the base (unscaled) values for the forward motor outputs
-  float left_motor_base, right_motor_base; // right motor base power, left motor base power
-
   // motor directions (assuming 127, 127 top right)
-  // motor values [-100, 100]
-  // if fowards
+  // motor values [-127, 127]
 
   float mag = sqrt(x * x + y * y); // magnitude of the vector
 
-	// writeDebugStreamLine("mag: %d", mag);
   float bearing = atan2(y, x); // direction of joystick relative to origin in degrees
 	bearing -= PI / 4; // offset bearing by pi / 4 radians
 
-
+	// calculate the base (unscaled) values for the forward motor outputs
   // offset vector by pi/4 degrees
-  left_motor_base = mag * cos(bearing);
-  right_motor_base = mag * sin(bearing);
+  float left_motor_base = mag * cos(bearing); // left motor base power
+  float right_motor_base = mag * sin(bearing); // right motor base power
 
-  // map left motor from angled proportion to to max motor proportion
+  // if 0, make value very very close to 0 but not 0 to prevent division by 0
+  left_motor_base = left_motor_base < 0 ? min(left_motor_base, -.000001) :
+  																	 			max(left_motor_base, .000001);
+
+  right_motor_base = right_motor_base < 0 ? min(right_motor_base, -.000001) :
+  																	 			max(right_motor_base, .000001);
+
   float left_motor_mapped = map(left_motor_base,
-  												JOYSTICK_MIN * abs(cos(bearing)),
-  												JOYSTICK_MAX * abs(cos(bearing)),
-  												MOTOR_MIN,
-  												MOTOR_MAX);
+																JOYSTICK_MIN * abs(cos(bearing)),
+																JOYSTICK_MAX * abs(cos(bearing)),
+																MOTOR_MIN,
+																MOTOR_MAX);
 
-  // map left motor from joystick angled proportion to to max motor proportion
-  float right_motor_mapped = map(right_motor_base,
-  												JOYSTICK_MIN * abs(sin(bearing)),
-  												JOYSTICK_MAX * abs(sin(bearing)),
-  												MOTOR_MIN,
-  												MOTOR_MAX);
+	float right_motor_mapped = map(right_motor_base,
+															 	 JOYSTICK_MIN * abs(sin(bearing)),
+																 JOYSTICK_MAX * abs(sin(bearing)),
+																 MOTOR_MIN,
+																 MOTOR_MAX);
 
+  float mult = min(abs(left_motor_mapped / left_motor_base), abs(right_motor_mapped / right_motor_base));
 
-	// writeDebugStreamLine("Left Motor: %d", left_motor_base);
-	// writeDebugStreamLine("Right Motor: %d", right_motor_base);
-	// writeDebugStreamLine("");
+  // map motors from angled proportion to to max motor proportion
+  float left_motor_final = left_motor_base * mult;
+	float right_motor_final = right_motor_base * mult;
 
 	// set motor values (one motor should be negative
-  motor[left_port] = -left_motor_mapped;
-  motor[right_port] = right_motor_mapped;
+  motor[left_port] = -left_motor_final;
+  motor[right_port] = right_motor_final;
 }
 
 void drive_control(Controller *c, int left_port, int right_port) {

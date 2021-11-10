@@ -13,6 +13,8 @@ or contact Isaac Song at isaacsong03@gmail.com
 #include "lift.h" // operate lift
 #include "autonomous.h" // autonomous portion
 
+#include "calc_test.h" // testing calculations
+
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
 #define RIGHT_MOTOR port3
@@ -89,14 +91,15 @@ task main(){
 			//writeDebugStreamLine("testing done");
 
 		// Calculation Tests
-			// writeDebugStreamLine("(5, 0) : %f", atan2(5, 0));
-			// writeDebugStreamLine("(-5, 0): %f", atan2(-5, 0));
-			// writeDebugStreamLine("(0, 5) : %f", atan2(0, 5));
-			// writeDebugStreamLine("(0, -5): %f", atan2(0, 5));
-			//writeDebugStreamLine("map(-3, -10, 10, -10, 10): %f", map(-3, -10, 10, -10, 10));
-			// float mag = sqrt(x * x + y * y); // magnitude of the vector
-			// writeDebugStreamLine("mag: %d", mag);
-
+			//map_test();
+			//motor_calc(0, 127);
+			//motor_calc(0, -127);
+			//motor_calc(127, 0);
+			//motor_calc(-127, 0);
+			//motor_calc(127 * sin(PI/4), 127 * cos(PI/4));
+			//motor_calc(127 * sin(PI/4), -127 * cos(PI/4));
+			//motor_calc(-127 * sin(PI/4), 127 * cos(PI/4));
+			//motor_calc(-127 * sin(PI/4), -127 * cos(PI/4));
 		//return;
 
 

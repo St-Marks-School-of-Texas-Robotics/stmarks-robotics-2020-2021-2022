@@ -43,11 +43,11 @@ float map(float i, float i_min, float i_max, float f_min, float f_max) {
 
 	// Corner Case: avoid dividing by 0
 	if (i_max == i_min) {
-		return i_max
+		return f_max;
 	}
 
 	// formula for ratio
-	return ((i - i_min) * (f_max - f_min) / (i_max - i_min)) + f_min
+	return ((i - i_min) * (f_max - f_min) / (i_max - i_min)) + f_min;
 }
 
 #endif // close guard

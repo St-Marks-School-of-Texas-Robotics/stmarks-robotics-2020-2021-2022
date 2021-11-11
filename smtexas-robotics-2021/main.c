@@ -50,7 +50,7 @@ void movement(Controller *c, int left_port, int right_port) {
 	}
 
 	// control the robot
-	drive_control(c, left_port, right_port);
+	joystick_drive_control(c, left_port, right_port);
 }
 
 // main function
@@ -74,7 +74,8 @@ task main(){
 		// uncomment specific lines to test individual parts
 
 		// Base  Tests
-			//drive_test(LEFT_MOTOR, RIGHT_MOTOR);
+			//joystick_drive_test(LEFT_MOTOR, RIGHT_MOTOR);
+			//tank_drive_test(LEFT_MOTOR, RIGHT_MOTOR);
 
 		// Lightpole Servo Test
 			//pole_test(POLE_SERVO);

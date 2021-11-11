@@ -46,7 +46,7 @@ void drop_light_pole(Controller *c, int pole_port) {
 	// rotate to prev  pole when button pressed for first time after release
 	// 		right pad bottom button
 	else if (c->btn8.down && undrop_pressed == false) {
-		pole_current_hole = max(1, pole_current_hole - 1); // decrement flag motor allignment to num hole, avoid below 0
+		pole_current_hole = max(0, pole_current_hole - 1); // decrement flag motor allignment to num hole, avoid below 0
 
 		drop_pressed = true; // set state to true to not call function until after another button release
 	}

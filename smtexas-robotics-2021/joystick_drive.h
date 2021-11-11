@@ -1,5 +1,5 @@
 /* joystick_drive.h
-Module to enbale movement controls with joystick
+Module to enbale movement controls with joystick arcade drive
 Generic Code
 */
 
@@ -66,7 +66,7 @@ void joystick_drive(float x, float y, int left_port, int right_port) {
   motor[right_port] = right_motor_final;
 }
 
-void drive_control(Controller *c, int left_port, int right_port) {
+void joystick_drive_control(Controller *c, int left_port, int right_port) {
 	// controls base movement with joystick
 	//
 	// PARAMS
@@ -86,7 +86,7 @@ void drive_control(Controller *c, int left_port, int right_port) {
 
 
 // testing the motor functions with basic movement controls
-void drive_test(int left_port, int right_port) {
+void joystick_drive_test(int left_port, int right_port) {
 	// tests basic outputs, used for testing
 	//
 	// PARAMS
@@ -132,7 +132,7 @@ void drive_test(int left_port, int right_port) {
 	joystick_drive(0, 0, left_port, right_port); // move straight
 	wait1Msec(3000); // keep moving straight for 5 secs
 
-	writeDebugStreamLine("motor test done");
+	writeDebugStreamLine("joystick drive test done");
 }
 
 #endif // close guard

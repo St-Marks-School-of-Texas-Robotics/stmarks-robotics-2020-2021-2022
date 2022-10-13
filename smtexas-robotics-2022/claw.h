@@ -11,11 +11,13 @@ void move_claw(Controller *c, int left_claw_port,  int right_claw_port, int fron
 	////left side
 	while(SensorValue[front_left] && c->btn5.up)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
+		//move claw forward
 		motor[left_claw_port] = 10;
 	}
 	//Once the sensor is touched, the program will end and motors will stop.
 	while(SensorValue[back_left] && c->btn5.down)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
+		//move claw backwards
 		motor[right_claw_port] = -10;  //Set the rightMotor (motor6) to half power (50)
 	}
 

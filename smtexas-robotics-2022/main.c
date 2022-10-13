@@ -20,6 +20,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "claw.h" // claw
 #include "hinge.h" // hinge for box
+#include "battery.h" // battery dropper
 
 
 // PORTS ASSIGNMENTS
@@ -28,6 +29,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 #define LEFT_CLAW_MOTOR port4
 #define RIGHT_CLAW_MOTOR port5
 #define HINGE_SERVO port6
+#define BATTERY_SERVO port6
 #define CLAW_FL_SWITCH dgtl1 //1
 #define CLAW_BL_SWITCH dgtl2 //2
 #define CLAW_FR_SWITCH dgtl3 //3
@@ -127,6 +129,7 @@ task main(){
 	  update_controller(c); // continuously update controller value
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
+		drop_battery(c, BATTERY_SERVO); // control light pole
 		move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement
 		//operate_arm(c, ARM_MOTOR); // operates the lift
 		//operate_claw(c, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // operates the claw

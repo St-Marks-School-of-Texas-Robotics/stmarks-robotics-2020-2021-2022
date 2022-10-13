@@ -18,7 +18,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "calc_test.h" // testing calculations
 
-#include "claw.h" // testing calculations
+#include "claw.h" // claw
 
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
@@ -27,8 +27,8 @@ or contact Isaac Song at isaacsong03@gmail.com
 #define RIGHT_CLAW_MOTOR port5
 #define CLAW_FL_SWITCH dgtl1 //1
 #define CLAW_BL_SWITCH dgtl2 //2
-#define CLAW_FR_SWITCH dgtl3 //1
-#define CLAW_BR_SWITCH dgtl4 //2
+#define CLAW_FR_SWITCH dgtl3 //3
+#define CLAW_BR_SWITCH dgtl4 //4
 
 
 /*

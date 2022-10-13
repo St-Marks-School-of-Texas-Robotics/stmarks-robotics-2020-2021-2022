@@ -13,8 +13,18 @@ Generic Code
 #define JOYSTICK_MAX 127 // maximum joystick value
 #define JOYSTICK_MIN -127 // minimum joystick value
 
+
+// STATES
+//int hinge_position = 0; // hole 0 is no hole
+bool reverse = false;
+
+// state tracker to only call button function once when pressed
+//false when not pressed, true when pressed
+bool reverse_pressed = false; // right pad right button
+
+
 // drive control with x and y values
-void joystick_drive(float x, float y, int left_port, int right_port) {
+void joystick_drive(Controller *c, float x, float y, int left_port, int right_port) {
 	// move robot with magnitude and direction from x and y value of joystick
 	//
 	// PARAMS
@@ -62,8 +72,37 @@ void joystick_drive(float x, float y, int left_port, int right_port) {
 	float right_motor_final = right_motor_base * mult;
 
 	// set motor values (one motor should be negative
-  motor[left_port] = -left_motor_final;
-  motor[right_port] = right_motor_final;
+
+
+
+
+  if (!c->btn7.down) {	// left pad down button
+		reverse_pressed = false; // reset state to false
+	}
+
+	// rotate to next hole when button pressed for first time after release
+	// 		right pad right button
+	if (c->btn7.down  && reverse_pressed == false) {
+		reverse = !reverse; // increment flag motor allignment to num hole, avoid exceeding 3
+
+		reverse_pressed = true; // set state to true to not call function until after another button release
+	}
+
+
+	// set the servo value according to the hole number
+	switch (reverse) {
+		case false: // open position
+			  motor[left_port] = left_motor_final;
+  			motor[right_port] = -right_motor_final;
+			break;
+
+		case true: // close position
+			  motor[left_port] = -left_motor_final;
+  			motor[right_port] = right_motor_final;
+			break;
+		}
+
+
 }
 
 void joystick_drive_control(Controller *c, int left_port, int right_port) {
@@ -81,10 +120,10 @@ void joystick_drive_control(Controller *c, int left_port, int right_port) {
   int y = j->y_axis * j->y_scale; // y value of movement [-127, 127]
 
   // move robot with joystick values
-  joystick_drive(x, y, left_port, right_port);
+  joystick_drive(c, x, y, left_port, right_port);
 }
 
-
+/*
 // testing the motor functions with basic movement controls
 void joystick_drive_test(int left_port, int right_port) {
 	// tests basic outputs, used for testing
@@ -134,5 +173,6 @@ void joystick_drive_test(int left_port, int right_port) {
 
 	writeDebugStreamLine("joystick drive test done");
 }
+*/
 
 #endif // close guard

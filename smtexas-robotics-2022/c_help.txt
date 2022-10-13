@@ -1,0 +1,191 @@
+St. Mark's Robotics Code Help
+
+Both a syntax and a help guide.
+Language is RobotC.
+This guide assumes that the reader has knowledge of some basic knowledge of programming.
+
+
+Note:
+NO TERNARY OPERATOR, too easy to make mistake (made that mistake already)
+USE += 1 TO INCREMENT, much more readable
+
+
+Legend:
+"|"			: anything on the right is description of the code for the reader of this guide to understand this better
+{desc} 		: substitute desc with what it states to includ, e.g. {describe the function}
+ex_...		: ex indicates example names especially for variables or objects, feel free to substitute when using it	
+
+
+anything in code chunks on the right of "|" is notes to understand the code better
+
+
+
+
+Table of Contents (Cmnd/Ctrl + F key to jump to section)
+
+     Name 						Desc			  					  Key
+——————————————————————————————————————————————————————————————————————————————————————————
+Pointers 				variable pointing to memory						#Point
+						(*var, &var)		
+
+Structs/Typedefs		Class like object								#Struct
+
+Void Functions			Functions										#Func
+
+Datastream				Console, similar to print() or debug()			#Console
+
+
+
+
+
+Pointers	(#Point)
+	
+	- a variable that "points" to the stored memory address instead of value
+	- saves memory and faster execution time
+	- allows compact code by bypassing any encapsulation issues by passing pointer as parameter
+	- *ex_pointer indicates a pointer, it points to a memory address, which is an int
+	- &ex_var returns the memory location of the variable ex_var
+	- pointers to pointers add * for each layer
+		- e.g. 
+			│  int *a = &ex_var
+			│  int **b = &a
+			│  int ***c = &b
+
+
+	Difference between store by value vs store by memory
+
+		Code:
+		│  // Store by Value
+		│  
+		│  int a = 1; 
+		│  int b = a; // b is equal to a's value
+		│  a = 0; // a is updated
+		│
+		│  writeDebugStreamLine("a is %d", a); // print value of a
+		│  writeDebugStreamLine("b is %d", b); // print value of b
+		│  
+		│  
+		│  
+		│  // Store by Memory
+		│  
+		│  int c = 1;
+		│  int *d = &c; // d "points" to the memory location of c
+		│  c = 0;		// c is updated
+		│  
+		│  writeDebugStreamLine("c is %d", c);	// print value of c
+		│  writeDebugStreamLine("d is %d", *d);	// print value of d
+		
+		Datastream:
+		│  a is 0
+		│  b is 1
+		│  c is 0
+		│  d is 0
+
+
+		Reason:
+			Store by Value:
+			"b" is equal to the value of "a" when it was declared, so when the memory location of "a" changes value, the value of "b" is still the old value of "a" when it was originally declared and will not change
+
+			Store by Memory:
+			"d" is equal to the memory location of "c" when it was declared, so when the memory location of "c" changes value,
+			"d" still "points" to the old memory location of "c" so the value of "d" value updates to the new value of "c"
+
+	Syntax:
+		│  *ex_pointer = &ex_var // ex_pointer points to ex_var 							| ex_pointer is equal to value of 	│  																					  ex_var
+		│  ex_function(*ex_pointer) // run ex_function										| run ex_funnction with the value of │  																				   ex_var as its sole parameter
+
+
+
+
+
+Structs / Typedef																									(#Struct)
+	
+	- a class like object
+	- structure is a user defined data type available in C
+	  that allows to combine data items of different kinds
+	- "typedef struct" instead of "struct" allows you to call
+	  the object ("namewithout having to specify "[type] [name]"
+	- struct name should be capitalized, e.g. Controller
+	- "." and "->" same thing, "->" better for readability
+	
+	Syntax:
+
+		"struct"
+			
+			│  // struct Ex_Name
+			│  struct Ex_Name {
+			│  	// {struct def}
+			│   char ex_string[10]; 	// {description of what ex_string is used for} 		| ex_text is member string of 
+			│ 																				  ex_name of max length 10
+			│ 																				  
+			│  	int ex_int; 			// {description of what ex_text is used for}		| ex_int is member int of ex_name
+			│  	bool ex_bool; 			// {description of what ex_bool is used for} 		| ex_bool is member boolean of ex_name
+			│  	float ex_float;			// {description of what ex_float is used for}		| ex_float is member float of ex_name
+			│  };
+			│ 
+			│  struct Ex_Name Ex_object; // declare Ex_object of type ex_name 				| declare Ex_object of type Ex_name
+			│  
+			│  	
+		
+
+		"typedef struct"
+			
+			│  // struct Ex_Name
+			│  typedef struct{
+			│  	// {struct def}
+			│   char ex_string[10]; 	// {description of what ex_string is used for} 		| ex_text is member string of ex_name │																					of max length 10
+			│  	int ex_int; 			// {description of what ex_text is used for}		| ex_int is member int of ex_name
+			│  	bool ex_bool; 			// {description of what ex_bool is used for} 		| ex_bool is member boolean of ex_name
+			│  	float ex_float;			// {description of what ex_float is used for}		| ex_float is member float of ex_name
+			│  } Ex_Name;
+			│  
+			│  Ex_Name Ex_object; // declare Ex_object of type ex_name 						| declare Ex_object of type Ex_name
+
+
+
+
+Functions																											(#Func)
+	
+	- standard def of functions
+	- encapsulation
+	- void functions typically
+	- pointers important
+		- pass in pointers
+		- update values of pointed to
+
+	Syntax:
+		"void"
+
+			│  // func ex_name
+			│  void ex_name (Ex_Object ex_object, int ex_int) {
+			│  	// {func def}
+			│  	// Params
+			│  	// 	  ex_object   {ex_object desc}
+			│  	//	  ex_int 	   {ex_int desc}
+			│  	
+			│   ex_object->*ex_var = ex_int; // update ex_var of ex_object to ex_int 		| updates the memory location of 
+			│  																				  ex_var to be
+			│  }
+			│  
+			│  Ex_name Ex_object; // declare Ex_object of type ex_name 						| declare Ex_object of type Ex_name
+
+
+
+
+Datastream																											(#Console)
+
+	- Console equivalent in Robot C
+	- Requires Expert or Super User (suggested)
+		- Window -> Menu Level-> Expert or Super User (suggested)
+		- Robot -> Debugger Window -> Datastream 
+
+	
+
+
+
+
+
+
+Contributors:
+
+"This is just a quick guide for C syntax" - Isaac Song 10/21

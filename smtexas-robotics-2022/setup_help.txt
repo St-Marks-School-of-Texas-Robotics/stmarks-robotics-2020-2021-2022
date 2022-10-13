@@ -1,0 +1,28 @@
+HOW TO SETUP ROBOT C AND HARDWARE
+
+
+Download RobotC IDE from (https://www.vexrobotics.com/robotc-vexedr-vexiq.html)
+
+RobotC:
+	1. Window -> Menu Level-> Super User
+		- unlocks many previously hidden features
+
+	2. Robot -> Debugger Window -> Datastream 
+		- opens a console where you can print to
+			- absolutely essential for classical debugging
+
+	3. (OPTIONAL) Robot -> Compile Target -> PC-Based Emulator
+		- allows running code locally without connecting to robot
+		- be sure to swtich back to robot when plugging into robot
+
+
+How to Flash Code to Robot:
+	1. Connect robot to computer with USB to USB
+	2. turn on robot
+	3. Download to Robot while on the "main.c" tab
+
+How to Connect Controller:
+	1. Plug Wireless USB sticks to both
+	2. Turn both robot and controller on
+	3. Wait until all the lights on both turn green, could take 10+ secs
+

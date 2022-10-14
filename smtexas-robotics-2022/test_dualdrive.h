@@ -6,8 +6,13 @@ Generic Code
 #ifndef TEST_DUAL_DRIVE_H // include guard
 #define TEST_DUAL_DRIVE_H
 
-// CONSTANTS
 
+// CONSTANTS
+#define MOTOR_MAX 100 // maximum power of motor
+#define MOTOR_MIN -100 // minimum power of motor
+
+#define JOYSTICK_MAX 127 // maximum joystick value
+#define JOYSTICK_MIN -127 // minimum joystick value
 
 // drive control with x and y values
 void dual_drive(float y, float x, int left_port, int right_port) {
@@ -28,6 +33,7 @@ void dual_drive(float y, float x, int left_port, int right_port) {
 																JOYSTICK_MAX,
 																MOTOR_MIN,
 																MOTOR_MAX);
+	print
 
 	float x_final = map(x,
 															 	 JOYSTICK_MIN,
@@ -35,12 +41,16 @@ void dual_drive(float y, float x, int left_port, int right_port) {
 																 MOTOR_MIN,
 																 MOTOR_MAX);
 
+	motor[left_port] = x;
+  motor[right_port] = y;
+																 /*
 	float denominator = max( abs(y_final) + abs(x_final) , 1);
 
 	// set motor values (one motor should be negative
 	//turn counter clockwise
   motor[left_port] = (y_final + x_final) / denominator;
   motor[right_port] = -( (y_final - x_final) / denominator );
+  */
 }
 
 void dual_drive_control(Controller *c, int left_port, int right_port) {

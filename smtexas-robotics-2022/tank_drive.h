@@ -7,11 +7,7 @@ Generic Code
 #define TANK_DRIVE_H
 
 // CONSTANTS
-#define MOTOR_MAX 100 // maximum power of motor
-#define MOTOR_MIN -100 // minimum power of motor
 
-#define JOYSTICK_MAX 127 // maximum joystick value
-#define JOYSTICK_MIN -127 // minimum joystick value
 
 // drive control with x and y values
 void tank_drive(float left_value, float right_value, int left_port, int right_port) {
@@ -28,8 +24,8 @@ void tank_drive(float left_value, float right_value, int left_port, int right_po
 
 	// map joystick values to motor values
   float left_motor_final = map(left_motor_base,
-																JOYSTICK_MIN),
-																JOYSTICK_MAX),
+																JOYSTICK_MIN,
+																JOYSTICK_MAX,
 																MOTOR_MIN,
 																MOTOR_MAX);
 

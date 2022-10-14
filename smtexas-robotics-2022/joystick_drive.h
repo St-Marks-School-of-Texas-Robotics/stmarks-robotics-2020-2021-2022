@@ -7,6 +7,7 @@ Generic Code
 #define JOYSTICK_DRIVE_H
 
 // CONSTANTS
+
 #define MOTOR_MAX 100 // maximum power of motor
 #define MOTOR_MIN -100 // minimum power of motor
 

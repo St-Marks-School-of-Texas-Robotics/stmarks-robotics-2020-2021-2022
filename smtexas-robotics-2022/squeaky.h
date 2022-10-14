@@ -37,7 +37,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 	if ( (lift_value != 0) && (y_final != 0) ) {    // drive + lift
-    sendChar(UART1, 0x55);
+    //sendChar(UART1, 0x55);
 
 		if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
 			motor[left_claw_port] = y_final;
@@ -50,7 +50,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 	}
   else if ( (lift_value != 0) && (x_final != 0) ) {     // turn + lift
-    sendChar(UART1, 0x5A);
+    //sendChar(UART1, 0x5A);
 
     //left claw
   	if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
@@ -64,7 +64,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
   }
   else { // drive + turn
-  	sendChar(UART1, 0x33);
+  	//sendChar(UART1, 0x33);
 
 
 

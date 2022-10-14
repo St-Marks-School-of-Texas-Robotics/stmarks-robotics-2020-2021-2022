@@ -7,15 +7,15 @@ Non-Generic Code
 #define CLAW_H
 
 
-void move_claw(Controller *c, int left_claw_port,  int right_claw_port, int front_left, int back_left, int front_right, int back_right) {
+void move_claw(Controller *c, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 	////left side
-	while(SensorValue[front_left] && c->btn5.up)	// Loop while robot's bumper/touch sensor isn't pressed in
+	while(SensorValue[front_left_port] && c->btn5.up)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
 		//move claw forward
 		motor[left_claw_port] = 10;
 	}
 	//Once the sensor is touched, the program will end and motors will stop.
-	while(SensorValue[back_left] && c->btn5.down)	// Loop while robot's bumper/touch sensor isn't pressed in
+	while(SensorValue[back_left_port] && c->btn5.down)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
 		//move claw backwards
 		motor[right_claw_port] = -10;  //Set the rightMotor (motor6) to half power (50)
@@ -23,12 +23,12 @@ void move_claw(Controller *c, int left_claw_port,  int right_claw_port, int fron
 
 
 
-	while(SensorValue[front_right] && c->btn6.up)	// Loop while robot's bumper/touch sensor isn't pressed in
+	while(SensorValue[front_right_port] && c->btn6.up)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
 		motor[left_claw_port] = 10;
 	}
 	//Once the sensor is touched, the program will end and motors will stop.
-	while(SensorValue[back_right] && c->btn6.down)	// Loop while robot's bumper/touch sensor isn't pressed in
+	while(SensorValue[back_right_port] && c->btn6.down)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{
 		motor[right_claw_port] = -10;  //Set the rightMotor (motor6) to half power (50)
 	}

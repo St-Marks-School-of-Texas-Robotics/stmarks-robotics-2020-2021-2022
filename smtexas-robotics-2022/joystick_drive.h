@@ -97,8 +97,8 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 			break;
 
 		case true: // close position
-			  motor[left_port] = -left_motor_final;
-  			motor[right_port] = right_motor_final;
+			  motor[left_port] = -right_motor_final;
+  			motor[right_port] = left_motor_final;
 			break;
 		}
 

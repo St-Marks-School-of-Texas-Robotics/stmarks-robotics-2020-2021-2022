@@ -55,7 +55,7 @@ void ir_switcher(Controller *c, int pole_port) {
 	// set the servo value according to the hole number
 	switch (ir_current_state) {
 		case 0: // home port
-			sendChar(UART1, 0x3C) //default level order
+			sendChar(UART1, 0xAA) //default level order
 			break;
 
 		case 1: // hole 1

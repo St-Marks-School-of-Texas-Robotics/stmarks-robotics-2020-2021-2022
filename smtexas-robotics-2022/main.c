@@ -22,7 +22,8 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "calc_test.h" // testing calculations
 
-#include "claw.h" // claw
+#include "squeaky.h" // squeaky mode
+
 #include "hinge.h" // hinge for box
 #include "battery.h" // battery dropper
 
@@ -83,6 +84,9 @@ void movement(Controller *c, int left_port, int right_port) {
 
 	// control the robot
 	joystick_drive_control(c, left_port, right_port);
+
+	joystick_squeaky_control(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);;
+
 	//dual_drive_control(c, left_port, right_port);
 }
 
@@ -146,7 +150,7 @@ task main(){
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
 		drop_battery(c, BATTERY_SERVO); // control light pole
-		move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement
+		//move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement
 		//operate_arm(c, ARM_MOTOR); // operates the lift
 		//operate_claw(c, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // operates the claw
 		//autonomous(c, LEFT_MOTOR, RIGHT_MOTOR, ARM_MOTOR, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // runs continuous on button press

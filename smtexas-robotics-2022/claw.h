@@ -3,11 +3,11 @@ code for lightpole dropper, specific to 2021 BEST game
 Non-Generic Code
 */
 
-#ifndef CLAW_H // include guard
-#define CLAW_H
+#ifndef SQUEAKY_MODE_H // include guard
+#define squeaky_MODE_H
 
 
-void move_claw(Controller *c, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
+void squeaky_mode(Controller *c, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 	////left side
 	while(SensorValue[front_left_port] && c->btn5.up)	// Loop while robot's bumper/touch sensor isn't pressed in
 	{

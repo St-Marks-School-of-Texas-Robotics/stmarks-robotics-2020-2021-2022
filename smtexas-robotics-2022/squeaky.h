@@ -23,36 +23,58 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 																 MOTOR_MAX);
 
 
-	// set motor values (one motor should be negative
-	//turn counter clockwise
+	int lift_value;
 
-	if ( (c->btn6.up || c->btn6.down) && (y != 0) ) {    // drive + lift
-    sendChar(UART1, 0x55)
+	if (c->btn6.up) {
+		lift_value = -1;
+	}
+	else if (c->btn6.down) {
+		lift_value = 1;
+	} else {
+		lift_value = 0;
+	}
+
+
+
+	if ( (lift_value != 0) && (y_final != 0) ) {    // drive + lift
+    sendChar(UART1, 0x55);
 
 		if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
-			motor[left_claw_port] = y;
+			motor[left_claw_port] = y_final;
 		}
 
+		//right claw
+  	if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
+			motor[right_claw_port] = lift_value * 100; // scale to motor value
+		}
 
 	}
-  else if ( (c->btn6.up || c->btn6.down) && (x != 0) ) {     // turn + lift
-    sendChar(UART1, 0x5A)
+  else if ( (lift_value != 0) && (x_final != 0) ) {     // turn + lift
+    sendChar(UART1, 0x5A);
 
+    //left claw
   	if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
-			motor[left_claw_port] = x;
+			motor[left_claw_port] = x_final;
+		}
+
+		//right claw
+  	if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
+			motor[right_claw_port] = lift_value * 100; // scale to motor value
 		}
 
   }
   else { // drive + turn
-  	sendChar(UART1, 0x33)
+  	sendChar(UART1, 0x33);
+
 
 
   	if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
-			motor[left_claw_port] = y;
+			motor[left_claw_port] = y_final;
 		}
 		if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
-			motor[right_claw_port] = x;
+			motor[right_claw_port] = x_final;
 		}
+
   }
 
 

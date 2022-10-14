@@ -31,6 +31,8 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "ir_baud.h" // ir uart
 
+#include "drive_selector.h" // selects regular vs squeaky
+
 
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
@@ -83,9 +85,12 @@ void movement(Controller *c, int left_port, int right_port) {
 	}
 
 	// control the robot
-	joystick_drive_control(c, left_port, right_port);
 
-	joystick_squeaky_control(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);;
+	drive_mode(c, LEFT_MOTOR, RIGHT_MOTOR, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
+
+	//joystick_drive_control(c, left_port, right_port);
+
+	//joystick_squeaky_control(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
 
 	//dual_drive_control(c, left_port, right_port);
 }

@@ -22,6 +22,8 @@ or contact Isaac Song at isaacsong03@gmail.com
 #include "hinge.h" // hinge for box
 #include "battery.h" // battery dropper
 
+#include "test_dualdrive.h" // 2 joystick drive
+
 
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
@@ -47,6 +49,9 @@ or contact Isaac Song at isaacsong03@gmail.com
 #define BASE_DEFAULT_MULT 1 // default multiplier for base control
 #define BASE_PREC_MULT 0.5 // multiplier for precise base control
 
+
+
+
 // movement function, controls the overall movement of the robot
 void movement(Controller *c, int left_port, int right_port) {
 	// moves robot
@@ -71,6 +76,7 @@ void movement(Controller *c, int left_port, int right_port) {
 
 	// control the robot
 	joystick_drive_control(c, left_port, right_port);
+	//dual_drive_control(c, left_port, right_port);
 }
 
 // main function

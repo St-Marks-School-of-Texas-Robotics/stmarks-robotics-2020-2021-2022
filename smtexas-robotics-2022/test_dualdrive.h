@@ -65,6 +65,7 @@ void dual_drive_control(Controller *c, int left_port, int right_port) {
   int y = l->y_axis * l->y_scale; // y value of movement [-127, 127]
 
   // move robot with joystick values
+  writeDebugStreamLine("test");
   dual_drive(c, x, y, left_port, right_port);
 }
 

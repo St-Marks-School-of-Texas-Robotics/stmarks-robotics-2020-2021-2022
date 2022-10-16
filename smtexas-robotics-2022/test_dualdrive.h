@@ -8,14 +8,10 @@ Generic Code
 
 
 // CONSTANTS
-#define MOTOR_MAX 100 // maximum power of motor
-#define MOTOR_MIN -100 // minimum power of motor
 
-#define JOYSTICK_MAX 127 // maximum joystick value
-#define JOYSTICK_MIN -127 // minimum joystick value
 
 // drive control with x and y values
-void dual_drive(float y, float x, int left_port, int right_port) {
+void dual_drive(Controller *c, float x, float y, int left_port, int right_port) {
 	// move robot with y value of left joystick controlling left motor and right joystick controlling right motor
 	//
 	// PARAMS
@@ -33,7 +29,6 @@ void dual_drive(float y, float x, int left_port, int right_port) {
 																JOYSTICK_MAX,
 																MOTOR_MIN,
 																MOTOR_MAX);
-	print
 
 	float x_final = map(x,
 															 	 JOYSTICK_MIN,
@@ -41,9 +36,9 @@ void dual_drive(float y, float x, int left_port, int right_port) {
 																 MOTOR_MIN,
 																 MOTOR_MAX);
 
-	motor[left_port] = x;
-  motor[right_port] = y;
-																 /*
+	motor[left_port] = x_final;
+  motor[right_port] = y_final;
+	/*
 	float denominator = max( abs(y_final) + abs(x_final) , 1);
 
 	// set motor values (one motor should be negative
@@ -53,6 +48,7 @@ void dual_drive(float y, float x, int left_port, int right_port) {
   */
 }
 
+
 void dual_drive_control(Controller *c, int left_port, int right_port) {
 	// controls base movement with joystick
 	//
@@ -61,15 +57,15 @@ void dual_drive_control(Controller *c, int left_port, int right_port) {
 	// 		int left_port: port num for left motor
 	// 		int right_port: port num for right motor
 
-	Joystick *left_joystick = c->Left; // joystick
-	Joystick *right_joystick = c->Right; // joystick
+	Joystick *l = c->Left; // joystick
+	Joystick *r = c->Right; // joystick
 
 	// general movement scaling
-  int y = left_joystick->y_scale; // y value of movement [-127, 127]
-  int x = right_joystick->x_scale; // x value of movement [-127, 127]
+  int x = r->x_axis * r->x_scale; // x value of movement [-127, 127]
+  int y = l->y_axis * l->y_scale; // y value of movement [-127, 127]
 
   // move robot with joystick values
-  dual_drive(y, x, left_port, right_port);
+  dual_drive(c, x, y, left_port, right_port);
 }
 
 /*

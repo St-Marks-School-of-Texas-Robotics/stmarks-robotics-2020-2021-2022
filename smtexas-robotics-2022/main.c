@@ -20,7 +20,6 @@ or contact Isaac Song at isaacsong03@gmail.com
 #include "lift.h" // operate lift
 #include "autonomous.h" // autonomous portion
 
-#include "tank_drive.h" // autonomous portion
 
 #include "calc_test.h" // testing calculations
 
@@ -90,12 +89,11 @@ void movement(Controller *c, int left_port, int right_port) {
 
 	//drive_mode(c, LEFT_MOTOR, RIGHT_MOTOR, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
 
-	//joystick_drive_control(c, left_port, right_port);
+	joystick_drive_control(c, left_port, right_port);
 
 	//joystick_squeaky_control(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
 
 	//dual_drive_control(c, left_port, right_port);
-	tank_drive_control(c, left_port, right_port);
 }
 
 // main function

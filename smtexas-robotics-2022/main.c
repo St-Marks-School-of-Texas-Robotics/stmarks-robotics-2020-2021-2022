@@ -88,13 +88,16 @@ void movement(Controller *c, int left_port, int right_port) {
 
 	// control the robot
 
-	//drive_mode(c, LEFT_MOTOR, RIGHT_MOTOR, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
+	//dirve selector function
+	drive_mode(c, LEFT_MOTOR, RIGHT_MOTOR, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
 
 	//joystick_drive_control(c, left_port, right_port);
 
 	//joystick_squeaky_control(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH);
 
 	//dual_drive_control(c, left_port, right_port);
+
+
 }
 
 // main function
@@ -153,6 +156,7 @@ task main(){
 
 	// main control loop
 	while (true) {
+
 	  update_controller(c); // continuously update controller value
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole

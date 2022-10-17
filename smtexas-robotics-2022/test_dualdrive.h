@@ -38,14 +38,14 @@ void dual_drive(Controller *c, float x, float y, int left_port, int right_port) 
 
 	motor[left_port] = x_final;
   motor[right_port] = y_final;
-	/*
+
 	float denominator = max( abs(y_final) + abs(x_final) , 1);
 
 	// set motor values (one motor should be negative
 	//turn counter clockwise
-  motor[left_port] = (y_final + x_final) / denominator;
-  motor[right_port] = -( (y_final - x_final) / denominator );
-  */
+  motor[left_port] = (y_final + x_final);
+  motor[right_port] = -( (y_final - x_final);
+
 }
 
 

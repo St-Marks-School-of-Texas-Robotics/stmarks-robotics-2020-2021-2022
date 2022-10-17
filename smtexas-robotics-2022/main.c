@@ -16,12 +16,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 #include "helper.h" // helper functions
 #include "controller.h" // controller object
 #include "joystick_drive.h" // joystick driving functions
-#include "lightpole.h" // lightpole operator
-#include "lift.h" // operate lift
-#include "autonomous.h" // autonomous portion
 
-
-#include "calc_test.h" // testing calculations
 
 #include "squeaky.h" // squeaky mode
 

@@ -36,7 +36,7 @@ void drive_mode(Controller *c, int left_port,  int right_port, int left_claw_por
 			break;
 
 		case true: // close position
-			joystick_squeaky_control(c, left_port, right_port, front_left_port, back_left_port, front_right_port, back_right_port);
+			joystick_squeaky_control(c, left_claw_port, right_claw_port, front_left_port, back_left_port, front_right_port, back_right_port);
 			break;
 		}
 

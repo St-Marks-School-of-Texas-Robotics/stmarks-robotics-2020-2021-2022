@@ -156,6 +156,7 @@ task main(){
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
 		drop_battery(c, BATTERY_SERVO); // control light pole
+
 		//move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement
 		//operate_arm(c, ARM_MOTOR); // operates the lift
 		//operate_claw(c, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // operates the claw

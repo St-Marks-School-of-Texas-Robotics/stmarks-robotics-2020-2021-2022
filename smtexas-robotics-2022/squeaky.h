@@ -124,11 +124,20 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 			motor[left_claw_port] = 0;
 		}
 
-		//right claw
-		if ( (SensorValue[CLAW_FR_SWITCH] == 0) && (SensorValue[CLAW_BR_SWITCH] == 0) ) {
-			motor[right_claw_port] = x_final;
-		}
 
+
+				//right claw forward
+  	if ( (SensorValue[CLAW_FR_SWITCH] == 0) && (x_final > 5) ) {
+
+			motor[right_claw_port] = -x_final;
+
+		} else if ( (SensorValue[CLAW_BR_SWITCH] == 0) && (x_final < -5) ) {   //right claw back
+
+			motor[right_claw_port] = -x_final;
+
+		} else {
+			motor[right_claw_port] = 0;
+		}
 
 
   }

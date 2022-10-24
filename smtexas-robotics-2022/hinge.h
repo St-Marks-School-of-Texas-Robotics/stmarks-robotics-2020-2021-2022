@@ -43,14 +43,28 @@ void close_hinge(Controller *c, int hinge_port) {
 	// set the servo value according to the hole number
 	switch (hinge_postion) {
 		case false: // open position
-			motor[hinge_port] = 127;
+			motor[hinge_port] = 0;
 			break;
 
 		case true: // close position
-			motor[hinge_port] = 95;
+			motor[hinge_port] = 75;
 			break;
 		}
 
+}
+
+void hinge_test(int pole_port) {
+	writeDebugStreamLine("hinge test start");
+
+	writeDebugStreamLine("hinge up");
+	motor[pole_port] = -127;
+	wait1Msec(2000);
+
+	writeDebugStreamLine("hinge down");
+	motor[pole_port] = 80;
+	wait1Msec(1000);
+
+	writeDebugStreamLine("hinge test done");
 }
 
 

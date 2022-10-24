@@ -123,7 +123,7 @@ task main(){
 			//tank_drive_test(LEFT_MOTOR, RIGHT_MOTOR);
 
 		// Lightpole Servo Test
-			//pole_test(POLE_SERVO);
+			//hinge_test(HINGE_SERVO);
 
 		// Arm Movement Test
 			//arm_test(port7);
@@ -150,6 +150,8 @@ task main(){
 
 
 	// main control loop
+
+
 	while (true) {
 
 	  update_controller(c); // continuously update controller value
@@ -163,4 +165,5 @@ task main(){
 		//autonomous(c, LEFT_MOTOR, RIGHT_MOTOR, ARM_MOTOR, LEFT_CLAW_SERVO, RIGHT_CLAW_SERVO); // runs continuous on button press
 
 	}
+
 }

@@ -54,11 +54,9 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
   	}
 
 
-    motor[left_claw_port] = x_final;
-    motor[right_claw_port] = lift_value * 50;
-    /*
+
     //left claw
-  	if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
+  	if ( SensorValue[CLAW_FL_SWITCH] != 1 && SensorValue[CLAW_BL_SWITCH] != 1 ) {
 			motor[left_claw_port] = x_final;
 		}
 
@@ -66,7 +64,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
   	if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
 			motor[right_claw_port] = lift_value * 100; // scale to motor value
 		}
-		*/
+
 
   }
   else if (lift_value != 0) {    // drive + lift
@@ -84,9 +82,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 
-    motor[left_claw_port] = y_final;
-    motor[right_claw_port] = lift_value * 50;
-    /*
+
     //left claw
 		if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
 			motor[left_claw_port] = y_final;
@@ -94,9 +90,9 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 		//right claw
   	if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
-			motor[right_claw_port] = lift_value * 100; // scale to motor value
+			motor[right_claw_port] = lift_value * 50; // scale to motor value
 		}
-		*/
+
 
 	}
   else { // drive + turn
@@ -115,22 +111,24 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 
-		if ( SensorValue[front_left_port] != 1) {
-			motor[left_claw_port] = y_final;
-		}
-  	//motor[left_claw_port] = y_final;
-    motor[right_claw_port] = x_final;
-  	/*
-		//left claw
-  	if ( SensorValue[front_left_port] != 1 && SensorValue[back_left_port] != 1 ) {
-			motor[left_claw_port] = y_final;
+		//left claw forward
+  	if ( (SensorValue[CLAW_FL_SWITCH] == 0) && (y_final > 5) ) {
+
+			motor[left_claw_port] = -y_final;
+
+		} else if ( (SensorValue[CLAW_BL_SWITCH] == 0) && (y_final < -5) ) {   //left claw back
+
+			motor[left_claw_port] = -y_final;
+
+		} else {
+			motor[left_claw_port] = 0;
 		}
 
 		//right claw
-		if ( SensorValue[front_right_port] != 1 && SensorValue[back_right_port] != 1 ) {
+		if ( (SensorValue[CLAW_FR_SWITCH] == 0) && (SensorValue[CLAW_BR_SWITCH] == 0) ) {
 			motor[right_claw_port] = x_final;
 		}
-		*/
+
 
 
   }

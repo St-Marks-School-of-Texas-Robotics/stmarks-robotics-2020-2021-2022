@@ -34,7 +34,7 @@ void drop_battery(Controller *c, int battery_port) {
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
 	if (c->btn8.down  && battery_drop_pressed == false) {
-		battery_postion = !hinge_postion; // increment flag motor allignment to num hole, avoid exceeding 3
+		battery_postion = !battery_postion; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		battery_drop_pressed = true; // set state to true to not call function until after another button release
 	}

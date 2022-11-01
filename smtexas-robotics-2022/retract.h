@@ -8,7 +8,7 @@ Non-Generic Code
 
 // STATES
 //int hinge_position = 0; // hole 0 is no hole
-bool retract_postion = false;
+bool retract_position = false;
 
 // state tracker to only call button function once when pressed
 //false when not pressed, true when pressed
@@ -17,7 +17,7 @@ bool retract_pressed = false; // right pad right button
 
 
 // control motor to drop light pole
-void retract_claw(Controller *c, int battery_port) {
+void retract_claw(Controller *c, int left_claw) {
 	// drops light poles
 	// right pad right button to drop next lightpole
 	// right pad bottom button to go back to previous slot
@@ -34,22 +34,25 @@ void retract_claw(Controller *c, int battery_port) {
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
 	if (c->btn8.left  && retract_pressed == false) {
-		retract_postion = !retract_postion; // increment flag motor allignment to num hole, avoid exceeding 3
+		retract_position = !retract_position; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		retract_pressed = true; // set state to true to not call function until after another button release
 	}
 
 
 	// set the servo value according to the hole number
-	switch (retract_postion) {
-		case false: // open position
-			motor[battery_port] = 127;
-			break;
+	if (retract_position) {
+		if ( (SensorValue[CLAW_BL_SWITCH] == 1) ) {   //left claw back
 
-		case true: // close position
-			motor[battery_port] = 95;
-			break;
+			motor[left_claw] = 50;
+
+		} else {
+			motor[left_claw] = 0;
+			retract_position = false;
 		}
+
+
+	}
 
 }
 

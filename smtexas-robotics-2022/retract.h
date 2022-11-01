@@ -14,10 +14,12 @@ bool retract_position = false;
 //false when not pressed, true when pressed
 bool retract_pressed = false; // right pad right button
 
+bool left_state = false; // right pad right button
+bool right_state = false; // right pad right button
 
 
 // control motor to drop light pole
-void retract_claw(Controller *c, int left_claw) {
+void retract_claw(Controller *c, int left_claw, int right_claw) {
 	// drops light poles
 	// right pad right button to drop next lightpole
 	// right pad bottom button to go back to previous slot
@@ -37,17 +39,40 @@ void retract_claw(Controller *c, int left_claw) {
 		retract_position = !retract_position; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		retract_pressed = true; // set state to true to not call function until after another button release
+		left_state = true;
+		right_state = true;
+		clearTimer(T2); //start timer 2
 	}
 
 
 	// set the servo value according to the hole number
 	if (retract_position) {
-		if ( (SensorValue[CLAW_BL_SWITCH] == 1) ) {   //left claw back
 
-			motor[left_claw] = 50;
+		if (left_state) {
 
-		} else {
-			motor[left_claw] = 0;
+			if ( (SensorValue[CLAW_BL_SWITCH] == 1) && (time1[T2] < 3500) ) {   //left claw back
+
+				motor[left_claw] = 50;
+
+			} else {
+				motor[left_claw] = 0;
+				left_state = false;
+			}
+		}
+
+		if (right_state) {
+
+			if ( (SensorValue[CLAW_BR_SWITCH] == 1) && (time1[T2] < 3500) ) {   //left claw back
+
+				motor[right_claw] = -50;
+
+			} else {
+				motor[left_claw] = 0;
+				right_state = false;
+			}
+		}
+
+		if (!left_state && !right_state) {
 			retract_position = false;
 		}
 

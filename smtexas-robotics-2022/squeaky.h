@@ -48,7 +48,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
   	if (curState != prevState) {
   		for (int i=0; i<3; i++)
       {
-        sendChar(UART1, 0x5A);
+        sendChar(UART1, 0x33);
       }
 
   	}
@@ -91,7 +91,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
   	if (curState != prevState) {
   		for (int i=0; i<3; i++)
       {
-        sendChar(UART1, 0x55);
+        sendChar(UART1, 0x66);
       }
 
   	}
@@ -137,7 +137,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
   	if (curState != prevState) {
   		for (int i=0; i<3; i++)
       {
-        sendChar(UART1, 0x33);
+        sendChar(UART1, 0x3C);
       }
 
   	}

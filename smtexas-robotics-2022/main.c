@@ -71,7 +71,7 @@ void movement(Controller *c, int left_port, int right_port) {
 	// 		int right_port: right motor port number
 
 	// precise control when up button on right pad (btn8.up) is pressed
-	if (c->btn8.up) {
+	if (c->btn5.up) {
 		// multiply x,y joystick values by precise multiplier
 		c->Left->x_scale = BASE_PREC_MULT;
 		c->Left->y_scale = BASE_PREC_MULT;

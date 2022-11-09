@@ -9,6 +9,13 @@ Non-Generic Code
 int prevState = 0;
 int curState = 0;
 
+bool curA = false;
+bool prevA = false;
+bool curB = false;
+bool prevB = false;
+char pos = NULL;
+char prevPos = NULL;
+
 void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
 // map joystick values to motor values
@@ -39,7 +46,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 
-
+/*
 
   if ( (lift_value != 0) && (abs(x_final) > 5) ) {     // turn + lift
 
@@ -130,7 +137,8 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 	}
-  else { // drive + turn
+	*/
+  //else { // drive + turn
 
   	curState = 3;
 
@@ -144,7 +152,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 
-
+/*
 
 		//left claw forward
   	if ( (SensorValue[CLAW_FL_SWITCH] == 1) && (y_final > 5) ) {
@@ -158,23 +166,92 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 		} else {
 			motor[left_claw_port] = 0;
 		}
+*/
+
+		// Right claw forward
+
+			if (vexRT[Btn6D] == 1) { //button held
+				curA = true;
+
+				if (curA && !prevA) { //rising edge
+					clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_FR_SWITCH] == 1) { //not at limit
+						motor[right_claw_port] = -100;
+				} else {
+						motor[right_claw_port] = 0;
+						pos = 'F';
+				}
+
+			} else { //button not held
+				curA = false;
+			}
 
 
-				//right claw forward
-  	if ( (SensorValue[CLAW_FR_SWITCH] == 1) && (x_final > 5) ) {
 
-			motor[right_claw_port] = -x_final;
+			if (!curA && prevA) { //falling edge RUNS ONCE
+					if (pos == 'F') {
+							pos = 'M';
+							prevPos = 'F'
+							clearTimer(T2);
+					}
+			}
 
-		} else if ( (SensorValue[CLAW_BR_SWITCH] == 1) && (x_final < -5) ) {   //right claw back
+			if (pos == 'M' && time1[T2] < 300) {
+					motor[right_claw_port] = 100;
+			} else if (pos == 'M' && time1[T2] >= 300 && prevPos == 'F') {
+					motor[right_claw_port] = 0;
+					pos = NULL;
+			}
 
-			motor[right_claw_port] = -x_final;
-
-		} else {
-			motor[right_claw_port] = 0;
-		}
 
 
-  }
+
+			// Right claw backward ////////////////////////////////////////////////////////////
+			if (vexRT[Btn6U] == 1) { //button held
+				curB = true;
+
+				if (curB && !prevB) { //rising edge
+					clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
+						motor[right_claw_port] = 100;
+				} else {
+						motor[right_claw_port] = 0;
+						pos = 'C';
+				}
+
+			} else { //button not held
+				curB = false;
+			}
+
+
+
+			if (!curB && prevB) { //falling edge RUNS ONCE
+					if (pos == 'C') {
+							pos = 'M';
+							prevPos = 'C'
+							clearTimer(T3);
+					}
+			}
+
+			if (pos == 'M' && time1[T3] < 500) {
+					motor[right_claw_port] = -100;
+			} else if (pos == 'M' && time1[T3] >= 500 && prevPos == 'C') {
+					motor[right_claw_port] = 0;
+					pos = NULL;
+			}
+
+
+
+			prevA = curA;
+			prevB = curB;
+
+
+
+  //}
 
 
 

@@ -333,7 +333,7 @@ int lift_value;
 
   default: //drive + turn
 
-
+  if (curState != prevState) {
   	for (int i=0; i<3; i++)
       {
         sendChar(UART1, 0x33);

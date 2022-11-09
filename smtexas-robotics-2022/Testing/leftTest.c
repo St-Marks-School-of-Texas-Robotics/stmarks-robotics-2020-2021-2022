@@ -82,7 +82,9 @@ task main()
 			}
 
 
-/*
+
+
+
 
 			// left claw backward ////////////////////////////////////////////////////////////
 			if (down == 1) { //button held
@@ -125,7 +127,7 @@ task main()
 			prevC = curC;
 			prevD = curD;
 
-*/
+
 
 	}
 

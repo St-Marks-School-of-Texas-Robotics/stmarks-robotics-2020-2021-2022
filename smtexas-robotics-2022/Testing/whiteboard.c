@@ -17,6 +17,10 @@ bool prevC = false;
 bool curD = false;
 bool prevD = false;
 
+int up = 0;
+int down = 0;
+
+
 char posR = NULL;
 char prevPosR = NULL;
 char posL = NULL;
@@ -111,11 +115,19 @@ task main()
 
 
 
-			// left claw forward ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if (vexRT[Ch3] > 15) {
+				up = 1;
+			} else {
+				up = 0;
+			}
 
+			if (vexRT[Ch3] < -15) {
+				down = 1;
+			} else {
+				down = 0;
+			}
 
-
-			if (vexRT[Ch3] > 15) { //button held
+			if (up == 1) { //button held
 				curC = true;
 
 				if (curC && !prevC) { //rising edge
@@ -153,8 +165,10 @@ task main()
 
 
 
+
+
 			// left claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] < -15) { //button held
+			if (down == 1) { //button held
 				curD = true;
 
 				if (curD && !prevD) { //rising edge
@@ -193,6 +207,7 @@ task main()
 
 			prevC = curC;
 			prevD = curD;
+
 
 
 

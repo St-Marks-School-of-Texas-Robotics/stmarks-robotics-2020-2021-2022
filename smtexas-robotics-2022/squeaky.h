@@ -13,8 +13,19 @@ bool curA = false;
 bool prevA = false;
 bool curB = false;
 bool prevB = false;
-char pos = NULL;
-char prevPos = NULL;
+
+bool curC = false;
+bool prevC = false;
+bool curD = false;
+bool prevD = false;
+
+int up = 0;
+int down = 0;
+
+char posR = NULL;
+char prevPosR = NULL;
+char posL = NULL;
+char prevPosL = NULL;
 
 void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
@@ -174,14 +185,14 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
-					clearTimer(T1);
+					//clearTimer(T1);
 				}
 
 				if (SensorValue[CLAW_FR_SWITCH] == 1) { //not at limit
 						motor[right_claw_port] = -100;
 				} else {
 						motor[right_claw_port] = 0;
-						pos = 'F';
+						posR = 'F';
 				}
 
 			} else { //button not held
@@ -191,18 +202,18 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 			if (!curA && prevA) { //falling edge RUNS ONCE
-					if (pos == 'F') {
-							pos = 'M';
-							prevPos = 'F'
+					if (posR == 'F') {
+							posR = 'M';
+							prevPosR = 'F';
 							clearTimer(T2);
 					}
 			}
 
-			if (pos == 'M' && time1[T2] < 300) {
+			if (posR == 'M' && time1[T2] < 300) {
 					motor[right_claw_port] = 100;
-			} else if (pos == 'M' && time1[T2] >= 300 && prevPos == 'F') {
+			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
-					pos = NULL;
+					posR = NULL;
 			}
 
 
@@ -213,14 +224,14 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
-					clearTimer(T1);
+					//clearTimer(T1);
 				}
 
 				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
 						motor[right_claw_port] = 100;
 				} else {
 						motor[right_claw_port] = 0;
-						pos = 'C';
+						posR = 'C';
 				}
 
 			} else { //button not held
@@ -230,24 +241,120 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 			if (!curB && prevB) { //falling edge RUNS ONCE
-					if (pos == 'C') {
-							pos = 'M';
-							prevPos = 'C'
+					if (posR == 'C') {
+							posR = 'M';
+							prevPosR = 'C';
 							clearTimer(T3);
 					}
 			}
 
-			if (pos == 'M' && time1[T3] < 500) {
+			if (posR == 'M' && time1[T3] < 300) {
 					motor[right_claw_port] = -100;
-			} else if (pos == 'M' && time1[T3] >= 500 && prevPos == 'C') {
+			} else if (posR == 'M' && time1[T3] >= 300 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
-					pos = NULL;
+					posR = NULL;
 			}
 
 
 
 			prevA = curA;
 			prevB = curB;
+
+
+
+
+			if (vexRT[Ch3] > 15) {
+				up = 1;
+			} else {
+				up = 0;
+			}
+
+			if (vexRT[Ch3] < -15) {
+				down = 1;
+			} else {
+				down = 0;
+			}
+
+			if (up == 1) { //button held
+				curC = true;
+
+				if (curC && !prevC) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
+						motor[left_claw_port] = -35;
+				} else {
+						motor[left_claw_port] = 0;
+						posL = 'F';
+				}
+
+			} else { //button not held
+				curC = false;
+			}
+
+
+
+			if (!curC && prevC) { //falling edge RUNS ONCE
+					if (posL == 'F') {
+							posL = 'M';
+							prevPosL = 'F';
+							clearTimer(T4);
+					}
+			}
+
+			if (posL == 'M' && time1[T4] < 1300) {
+					motor[left_claw_port] = 35;
+			} else if (posL == 'M' && time1[T4] >= 1300 && prevPosL == 'F') {
+					motor[left_claw_port] = 0;
+					posL = NULL;
+			}
+
+
+
+
+
+
+			// left claw backward ////////////////////////////////////////////////////////////
+			if (down == 1) { //button held
+				curD = true;
+
+				if (curD && !prevD) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
+						motor[left_claw_port] = 35;
+				} else {
+						motor[left_claw_port] = 0;
+						posL = 'C';
+				}
+
+			} else { //button not held
+				curD = false;
+			}
+
+
+
+			if (!curD && prevD) { //falling edge RUNS ONCE
+					if (posL == 'C') {
+							posL = 'M';
+							prevPosL = 'C';
+							clearTimer(T1);
+					}
+			}
+
+			if (posL == 'M' && time1[T1] < 1300) {
+					motor[left_claw_port] = -35;
+			} else if (posL == 'M' && time1[T1] >= 1300 && prevPosL == 'C') {
+					motor[left_claw_port] = 0;
+					posL = NULL;
+			}
+
+
+
+			prevC = curC;
+			prevD = curD;
 
 
 

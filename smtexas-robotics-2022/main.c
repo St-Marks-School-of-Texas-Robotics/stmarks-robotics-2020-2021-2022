@@ -25,6 +25,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "hinge.h" // hinge for box
 #include "battery.h" // battery dropper
+#include "arm.h" // battery dropper
 
 #include "test_dualdrive.h" // 2 joystick drive
 
@@ -42,6 +43,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 #define RIGHT_CLAW_MOTOR port5
 #define HINGE_SERVO port6
 #define BATTERY_SERVO port7
+#define ARM_SERVO port8
 
 
 
@@ -160,6 +162,8 @@ task main(){
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
 		drop_battery(c, BATTERY_SERVO); // control light pole
+		drop_arm(c, ARM_SERVO); // control light pole
+
 		retract_claw(c , LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR);
 
 		//move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement

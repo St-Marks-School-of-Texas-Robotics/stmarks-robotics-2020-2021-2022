@@ -38,11 +38,11 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	// Change between states
 	switch (curState) {
 		case 1: // open position
-			motor[hinge_port] = 0;
+
 			break;
 
 		case 2: // close position
-			motor[hinge_port] = 75;
+
 			break;
 		}
 

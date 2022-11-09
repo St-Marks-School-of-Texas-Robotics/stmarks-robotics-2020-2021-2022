@@ -327,6 +327,243 @@ int lift_value;
       }
  		}
 
+ 		if (vexRT[Ch1] > 15) {
+				right = 1;
+			} else {
+				right = 0;
+			}
+
+			if (vexRT[Ch3] < -15) {
+				left = 1;
+			} else {
+				left = 0;
+			}
+
+	// Right claw forward
+
+
+			if (right == 1) { //button held
+				curA = true;
+
+				if (curA && !prevA) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
+						motor[left_claw_port] = 100;
+						posL = 'G';
+				} else {
+						motor[left_claw_port] = 0;
+						posL = 'F';
+				}
+
+			} else { //button not held
+				curA = false;
+			}
+
+
+			if (SensorValue[CLAW_FL_SWITCH] == 0 && posR == 'G') { //falling edge RUNS ONCE
+
+							posR = 'M';
+							prevPosR = 'F';
+							clearTimer(T2);
+
+			}
+
+
+
+			if (!curA && prevA) { //falling edge RUNS ONCE
+					if (posR == 'F') {
+							posR = 'M';
+							prevPosR = 'F';
+							clearTimer(T2);
+					}
+			}
+
+			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') {
+					motor[right_claw_port] = 100;
+			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
+					motor[right_claw_port] = 0;
+					posR = NULL;
+			}
+
+
+
+
+			// Right claw backward ////////////////////////////////////////////////////////////
+			if (left == 1) { //button held
+				curB = true;
+
+				if (curB && !prevB) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
+						motor[right_claw_port] = 100;
+						posR = 'G';
+				} else {
+						motor[right_claw_port] = 0;
+						posR = 'C';
+				}
+
+			} else { //button not held
+				curB = false;
+			}
+
+			if (SensorValue[CLAW_BR_SWITCH] == 0 && posR == 'G') { //falling edge RUNS ONCE
+
+							posR = 'M';
+							prevPosR = 'C';
+							clearTimer(T3);
+
+			}
+
+
+
+			if (!curB && prevB) { //falling edge RUNS ONCE
+					if (posR == 'C') {
+							posR = 'M';
+							prevPosR = 'C';
+							clearTimer(T3);
+					}
+			}
+
+			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') {
+					motor[right_claw_port] = -100;
+			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
+					motor[right_claw_port] = 0;
+					posR = NULL;
+			}
+
+
+
+			prevA = curA;
+			prevB = curB;
+
+
+
+
+
+
+
+
+
+
+
+
+ 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if (vexRT[Ch3] > 15) {
+				up = 1;
+			} else {
+				up = 0;
+			}
+
+			if (vexRT[Ch3] < -15) {
+				down = 1;
+			} else {
+				down = 0;
+			}
+
+			if (up == 1) { //button held
+				curC = true;
+
+				if (curC && !prevC) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
+						motor[left_claw_port] = -35;
+						posL = 'G';
+				} else {
+						motor[left_claw_port] = 0;
+						posL = 'F';
+				}
+
+			} else { //button not held
+				curC = false;
+			}
+
+
+			if (SensorValue[CLAW_FL_SWITCH] == 0 && posL == 'G') { //falling edge RUNS ONCE
+
+							posL = 'M';
+							prevPosL = 'F';
+							clearTimer(T4);
+
+			}
+
+
+
+			if (!curC && prevC) { //falling edge RUNS ONCE
+					if (posL == 'F') {
+							posL = 'M';
+							prevPosL = 'F';
+							clearTimer(T4);
+					}
+			}
+
+			if (posL == 'M' && time1[T4] < 1300 && prevPosL == 'F') {
+					motor[left_claw_port] = 35;
+			} else if (posL == 'M' && time1[T4] >= 1300 && prevPosL == 'F') {
+					motor[left_claw_port] = 0;
+					posL = NULL;
+			}
+
+
+
+
+
+
+			// left claw backward ////////////////////////////////////////////////////////////
+			if (down == 1) { //button held
+				curD = true;
+
+				if (curD && !prevD) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
+						motor[left_claw_port] = 35;
+						posL = 'G';
+				} else {
+						motor[left_claw_port] = 0;
+						posL = 'C';
+				}
+
+			} else { //button not held
+				curD = false;
+			}
+
+			if (SensorValue[CLAW_BL_SWITCH] == 0 && posL == 'G') { //falling edge RUNS ONCE
+
+							posL = 'M';
+							prevPosL = 'C';
+							clearTimer(T1);
+
+			}
+
+
+
+			if (!curD && prevD) { //falling edge RUNS ONCE
+					if (posL == 'C') {
+							posL = 'M';
+							prevPosL = 'C';
+							clearTimer(T1);
+					}
+			}
+
+			if (posL == 'M' && time1[T1] < 1300 && prevPosL == 'C') {
+					motor[left_claw_port] = -35;
+			} else if (posL == 'M' && time1[T1] >= 1300 && prevPosL == 'C') {
+					motor[left_claw_port] = 0;
+					posL = NULL;
+			}
+
+
+
+			prevC = curC;
+			prevD = curD;
+
 
 
     break;

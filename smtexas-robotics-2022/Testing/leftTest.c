@@ -19,6 +19,8 @@ bool prevD = false;
 
 int up = 0;
 int down = 0;
+int left = 0;
+int right = 0;
 
 char posR = NULL;
 char prevPosR = NULL;
@@ -127,6 +129,102 @@ task main()
 			prevC = curC;
 			prevD = curD;
 
+
+
+			// Right Joystick  forward ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if (vexRT[Ch3] > 15) {
+				up = 1;
+			} else {
+				up = 0;
+			}
+
+			if (vexRT[Ch3] < -15) {
+				down = 1;
+			} else {
+				down = 0;
+			}
+
+			if (up == 1) { //button held
+				curC = true;
+
+				if (curC && !prevC) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
+						motor[LEFT_CLAW_MOTOR] = -35;
+				} else {
+						motor[LEFT_CLAW_MOTOR] = 0;
+						posL = 'F';
+				}
+
+			} else { //button not held
+				curC = false;
+			}
+
+
+
+			if (!curC && prevC) { //falling edge RUNS ONCE
+					if (posL == 'F') {
+							posL = 'M';
+							prevPosL = 'F';
+							clearTimer(T4);
+					}
+			}
+
+			if (posL == 'M' && time1[T4] < 1300) {
+					motor[LEFT_CLAW_MOTOR] = 35;
+			} else if (posL == 'M' && time1[T4] >= 1300 && prevPosL == 'F') {
+					motor[LEFT_CLAW_MOTOR] = 0;
+					posL = NULL;
+			}
+
+
+
+
+
+
+			// left claw backward ////////////////////////////////////////////////////////////
+			if (down == 1) { //button held
+				curD = true;
+
+				if (curD && !prevD) { //rising edge
+					//clearTimer(T1);
+				}
+
+				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
+						motor[LEFT_CLAW_MOTOR] = 35;
+				} else {
+						motor[LEFT_CLAW_MOTOR] = 0;
+						posL = 'C';
+				}
+
+			} else { //button not held
+				curD = false;
+			}
+
+
+
+			if (!curD && prevD) { //falling edge RUNS ONCE
+					if (posL == 'C') {
+							posL = 'M';
+							prevPosL = 'C';
+							clearTimer(T1);
+					}
+			}
+
+			if (posL == 'M' && time1[T1] < 1300) {
+					motor[LEFT_CLAW_MOTOR] = -35;
+			} else if (posL == 'M' && time1[T1] >= 1300 && prevPosL == 'C') {
+					motor[LEFT_CLAW_MOTOR] = 0;
+					posL = NULL;
+			}
+
+
+
+			prevC = curC;
+			prevD = curD;
 
 
 	}

@@ -327,34 +327,22 @@ int lift_value;
       }
  		}
 
- 		if (vexRT[Ch1] > 15) {
-				right = 1;
-			} else {
-				right = 0;
-			}
 
-			if (vexRT[Ch3] < -15) {
-				left = 1;
-			} else {
-				left = 0;
-			}
+		 // Right claw forward
 
-	// Right claw forward
-
-
-			if (right == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //button held
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
 					//clearTimer(T1);
 				}
 
-				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = 100;
-						posL = 'G';
+				if (SensorValue[CLAW_FR_SWITCH] == 1) { //not at limit
+						motor[right_claw_port] = -100;
+						posR = 'G';
 				} else {
-						motor[left_claw_port] = 0;
-						posL = 'F';
+						motor[right_claw_port] = 0;
+						posR = 'F';
 				}
 
 			} else { //button not held
@@ -362,7 +350,7 @@ int lift_value;
 			}
 
 
-			if (SensorValue[CLAW_FL_SWITCH] == 0 && posR == 'G') { //falling edge RUNS ONCE
+			if (SensorValue[CLAW_FR_SWITCH] == 0 && posR == 'G') { //falling edge RUNS ONCE
 
 							posR = 'M';
 							prevPosR = 'F';
@@ -391,7 +379,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (left == 1) { //button held
+			if (vexRT[Btn6U] == 1) { //button held
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -439,32 +427,22 @@ int lift_value;
 
 			prevA = curA;
 			prevB = curB;
+////////////////////////////////////////////////////////////////////////////////////////////turn left claw
 
 
-
-
-
-
-
-
-
-
-
-
- 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] > 15) {
-				up = 1;
+			if (vexRT[Ch1] > 15) {
+				turn = 1;
 			} else {
-				up = 0;
+				turn = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
-				down = 1;
+			if (vexRT[Ch1] < -15) {
+				left = 1;
 			} else {
-				down = 0;
+				left = 0;
 			}
 
-			if (up == 1) { //button held
+			if (right == 1) { //button held
 				curC = true;
 
 				if (curC && !prevC) { //rising edge
@@ -515,7 +493,7 @@ int lift_value;
 
 
 			// left claw backward ////////////////////////////////////////////////////////////
-			if (down == 1) { //button held
+			if (left == 1) { //button held
 				curD = true;
 
 				if (curD && !prevD) { //rising edge
@@ -564,6 +542,8 @@ int lift_value;
 			prevC = curC;
 			prevD = curD;
 
+
+ 		
 
 
     break;

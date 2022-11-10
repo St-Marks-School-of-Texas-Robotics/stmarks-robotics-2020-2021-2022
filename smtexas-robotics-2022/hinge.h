@@ -47,7 +47,7 @@ void close_hinge(Controller *c, int hinge_port) {
 			break;
 
 		case true: // close position
-			motor[hinge_port] = 75;
+			motor[hinge_port] = 115;
 			break;
 		}
 

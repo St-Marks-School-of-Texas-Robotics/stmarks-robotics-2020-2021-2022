@@ -51,7 +51,7 @@ int lift_value;
 
 
 
-
+/*
 
 
 	if ( (lift_value != 0) || (abs(y) > 15) ) {     // turn + lift
@@ -70,7 +70,7 @@ int lift_value;
 
 	}
 
-
+*/
 
 
 
@@ -79,13 +79,17 @@ int lift_value;
   {
   case 1: //drive + lift
 
+  if (abs(vexRT[Ch1]) > 15) {
+  		curState = 3;
+  }
+
 
 
 
   	if (curState != prevState) {
   		for (int i=0; i<3; i++)
       {
-        sendChar(UART1, 0x33);
+        sendChar(UART1, 0x66);
       }
    }
 
@@ -319,6 +323,11 @@ int lift_value;
    case 2: //turn + lift
 
 
+   if (abs(vexRT[Ch3]) > 15) {
+  		curState = 1;
+  }
+
+
 
    	if (curState != prevState) {
   		for (int i=0; i<3; i++)
@@ -431,9 +440,9 @@ int lift_value;
 
 
 			if (vexRT[Ch1] > 15) {
-				turn = 1;
+				right = 1;
 			} else {
-				turn = 0;
+				right = 0;
 			}
 
 			if (vexRT[Ch1] < -15) {
@@ -543,17 +552,22 @@ int lift_value;
 			prevD = curD;
 
 
- 		
+
 
 
     break;
 
   default: //drive + turn
 
+
+  if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
+  		curState = 2;
+  }
+
   if (curState != prevState) {
   	for (int i=0; i<3; i++)
       {
-        sendChar(UART1, 0x33);
+        sendChar(UART1, 0x3C);
       }
    }
 

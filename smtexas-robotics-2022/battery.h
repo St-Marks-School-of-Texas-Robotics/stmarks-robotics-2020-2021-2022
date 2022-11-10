@@ -1,7 +1,4 @@
-/* lightpole.h
-code for lightpole dropper, specific to 2021 BEST game
-Non-Generic Code
-*/
+
 
 #ifndef BATTERY_H // include guard
 #define BATTERY_H

@@ -112,11 +112,11 @@ task main()
 
 
 			if (!curB && prevB) { //falling edge RUNS ONCE
-					if (posR == 'C') {
+
 							posR = 'M';
 							prevPosR = 'C';
 							clearTimer(T3);
-					}
+
 			}
 
 			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') {

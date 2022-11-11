@@ -82,22 +82,14 @@ int lift_value;
 	curState = 1;
 
 
-
-
-
-  	if (curState != prevState) {
-  		for (int i=0; i<3; i++)
-      {
-        sendChar(UART1, 0x66);
-      }
-   }
-
-
-
    if (abs(vexRT[Ch1]) > 15) { //switch state to default
   		curState = 3;
 
-  }
+		for (int i=0; i<3; i++){
+        	sendChar(UART1, 0x3C);
+      	}
+
+  	}
 
 
 
@@ -328,23 +320,19 @@ int lift_value;
 
    case 2: //turn + lift
 
-	curState = 2;
+		curState = 2;
 
 
 
 
 
-   	if (curState != prevState) {
-  		for (int i=0; i<3; i++)
-      {
-        sendChar(UART1, 0x33);
-      }
- 		}
 
  		if (abs(vexRT[Ch3]) > 15) { //left joystick moves - switch to drive + lift
-  		curState = 1;
-
-  }
+  			curState = 1;
+			for (int i=0; i<3; i++){
+        		sendChar(UART1, 0x66);
+     		}
+  		}
 
 
 		 // Right claw forward
@@ -573,15 +561,13 @@ int lift_value;
 
 
 
-  if (curState != prevState) {
-  	for (int i=0; i<3; i++)
-      {
-        sendChar(UART1, 0x3C);
-      }
-   }
-
    if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
   		curState = 2;
+
+		for (int i=0; i<3; i++)
+      	{
+        sendChar(UART1, 0x33);
+      	}  
   }
 
      if (vexRT[Ch1] > 15) {

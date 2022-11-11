@@ -29,7 +29,7 @@ char prevPosR = NULL;
 char posL = NULL;
 char prevPosL = NULL;
 
-void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port, int curState) {
+void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
 
 

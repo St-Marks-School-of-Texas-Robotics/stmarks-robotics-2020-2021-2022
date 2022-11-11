@@ -7,7 +7,6 @@ Non-Generic Code
 #define SQUEAKY_H
 
 int prevState = 0;
-int curState = 0;
 
 bool curA = false;
 bool prevA = false;
@@ -30,7 +29,7 @@ char prevPosR = NULL;
 char posL = NULL;
 char prevPosL = NULL;
 
-void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
+void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port, int curState) {
 
 
 

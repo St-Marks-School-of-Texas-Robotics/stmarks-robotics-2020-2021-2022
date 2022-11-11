@@ -17,7 +17,7 @@ bool arm_drop_pressed = false; // right pad right button
 
 
 // control motor to drop light pole
-void drop_arm(Controller *c, int arm_port) {
+void drop_arm(Controller *c, int arm_port1, int arm_port2) {
 	// drops light poles
 	// right pad right button to drop next lightpole
 	// right pad bottom button to go back to previous slot
@@ -43,11 +43,13 @@ void drop_arm(Controller *c, int arm_port) {
 	// set the servo value according to the hole number
 	switch (arm_postion) {
 		case false: // close position
-			motor[arm_port] = 0;
+			motor[arm_port1] = 0;
+			//motor[arm_port2] = 0;
 			break;
 
 		case true: // open position
-			motor[arm_port] = 70;
+			motor[arm_port1] = 70;
+			//motor[arm_port2] = 70;
 			break;
 		}
 

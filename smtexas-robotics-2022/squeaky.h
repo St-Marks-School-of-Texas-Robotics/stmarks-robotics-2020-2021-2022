@@ -175,11 +175,11 @@ int lift_value;
 
 
 			if (!curB && prevB) { //falling edge RUNS ONCE
-					if (posR == 'C') {
+					//if (posR == 'C') {
 							posR = 'M';
 							prevPosR = 'C';
 							clearTimer(T3);
-					}
+					//}
 			}
 
 			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //go forward from CLOSE TO MIDDLE
@@ -291,11 +291,11 @@ int lift_value;
 
 
 			if (!curD && prevD) { //falling edge RUNS ONCE
-					if (posL == 'C') {
+					//if (posL == 'C') {
 							posL = 'M';
 							prevPosL = 'C';
 							clearTimer(T1);
-					}
+					//}
 			}
 
 			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') { //go from CLOSE TO FAR
@@ -416,11 +416,11 @@ int lift_value;
 
 
 			if (!curB && prevB) { //falling edge RUNS ONCE
-					if (posR == 'C') {
+					//if (posR == 'C') {
 							posR = 'M';
 							prevPosR = 'C';
 							clearTimer(T3);
-					}
+					//}
 			}
 
 			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
@@ -530,11 +530,11 @@ int lift_value;
 
 
 			if (!curD && prevD) { //falling edge RUNS ONCE
-					if (posL == 'C') {
+					//if (posL == 'C') {
 							posL = 'M';
 							prevPosL = 'C';
 							clearTimer(T1);
-					}
+					//}
 			}
 
 			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') { //move forward from CLOSE TO MIDDLE
@@ -664,11 +664,11 @@ int lift_value;
 
 
 			if (!curB && prevB) { //falling edge RUNS ONCE
-					if (posR == 'C') {
+					//if (posR == 'C') {
 							posR = 'M';
 							prevPosR = 'C';
 							clearTimer(T3);
-					}
+					//}
 			}
 
 			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE TO MIDDLE
@@ -780,11 +780,11 @@ int lift_value;
 
 
 			if (!curD && prevD) { //falling edge RUNS ONCE
-					if (posL == 'C') {
+					//if (posL == 'C') {
 							posL = 'M';
 							prevPosL = 'C';
 							clearTimer(T1);
-					}
+					//}
 			}
 
 			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {

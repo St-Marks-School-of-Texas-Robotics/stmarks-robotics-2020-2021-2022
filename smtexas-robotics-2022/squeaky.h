@@ -42,24 +42,26 @@ int lift_value;
 
 	if (c->btn5.up) {
 		curSlow = true;
-		
+
 		if (curSlow && !prevSlow) { //rising edge
 			for (int i = 0; i < 3; i++) {
 				sendChar(UART1, 0x99); //drive to LOW
 			}
-			
+
 		}
 
-	} 
+	} else { //button not held
+				curSlow = false;
+		}
 
 	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
 		for (int i = 0; i < 3; i++) {
 			sendChar(UART1, 0xA5); //drive to medium
-		}			
+		}
 	}
 
 	prevSlow = curSlow;
-	
+
 
 
 
@@ -583,7 +585,7 @@ int lift_value;
 		for (int i=0; i<3; i++)
       	{
         sendChar(UART1, 0xCC);
-      	}  
+      	}
   }
 
      if (vexRT[Ch1] > 25) {

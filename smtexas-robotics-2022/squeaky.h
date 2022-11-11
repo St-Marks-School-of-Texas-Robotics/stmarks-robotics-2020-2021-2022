@@ -6,6 +6,7 @@ Non-Generic Code
 #ifndef SQUEAKY_H // include guard
 #define SQUEAKY_H
 
+int curState = 0;
 int prevState = 0;
 
 bool curA = false;

@@ -82,6 +82,7 @@ int lift_value;
 	curState = 1;
   if (abs(vexRT[Ch1]) > 15) { //switch state to default
   		curState = 3;
+		break;
   }
 
 
@@ -327,6 +328,7 @@ int lift_value;
 
    if (abs(vexRT[Ch3]) > 15) { //left joystick moves - switch to drive + lift
   		curState = 1;
+		break;
   }
 
 
@@ -565,6 +567,7 @@ int lift_value;
 
   if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
   		curState = 2;
+		break;
   }
 
   if (curState != prevState) {

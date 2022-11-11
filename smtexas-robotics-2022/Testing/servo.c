@@ -24,15 +24,28 @@
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
+  clearDebugStream();
+
+
+  writeDebugStreamLine("testing started");
+  /*
+  for(int i=-117; i<128; i+=10)     /* Starting 'i' at -117, and incrementing by 10, */
+    {                                 /* continue while 'i' is less than 0. */
+      motor[servoMotor] = i;          // Set 'servoMotor' to position 'i'.
+      writeDebugStreamLine("%d position", i);
+      wait1Msec(1000);                 // Wait for 0.25 seconds (gives time for the servo to move)
+    }
+    */
 
     //motor[servoMotor] = 0;       // Set 'servoMotor' to position -127 (negative end of range)
     wait1Msec(2000);                 // Wait for 0.5 seconds (gives time for the servo to move)
 
-    motor[servoMotor] = 115;       // Set 'servoMotor' to position -127 (negative end of range)
+    motor[servoMotor] = 0;       // Set 'servoMotor' to position -127 (negative end of range)
     wait1Msec(3000);                 // Wait for 0.5 seconds (gives time for the servo to move)
-    motor[servoMotor] = -115;
+    motor[servoMotor] = 20;
 
 
+    writeDebugStreamLine("testing done");
 
 
 }

@@ -96,7 +96,7 @@ int lift_value;
 
 	// Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //right down trigger - forward
+			if (vexRT[Btn6U] == 1) { //right down trigger - forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -145,7 +145,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { // top right trigger held - go backwards
+			if (vexRT[Btn6D] == 1) { // top right trigger held - go backwards
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -337,7 +337,7 @@ int lift_value;
 
 		 // Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			if (vexRT[Btn6U] == 1) { //button down held MOVE Forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -386,7 +386,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //button held
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -449,7 +449,7 @@ int lift_value;
 				left = 0;
 			}
 
-			if (right == 1) { //button held
+			if (left == 1) { //button held
 				curC = true;
 
 				if (curC && !prevC) { //rising edge
@@ -500,7 +500,7 @@ int lift_value;
 
 
 			// left claw backward ////////////////////////////////////////////////////////////
-			if (left == 1) { //button held
+			if (right == 1) { //button held
 				curD = true;
 
 				if (curD && !prevD) { //rising edge
@@ -585,7 +585,7 @@ int lift_value;
 	// Right claw forward
 
 
-			if (right == 1) { //button held
+			if (left == 1) { //button held
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -634,7 +634,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (left == 1) { //button held
+			if (right == 1) { //button held
 				curB = true;
 
 				if (curB && !prevB) { //rising edge

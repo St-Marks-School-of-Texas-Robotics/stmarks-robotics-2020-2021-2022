@@ -80,7 +80,7 @@ int lift_value;
   case 1: //drive + lift
 
 	curState = 1;
-  if (abs(vexRT[Ch1]) > 15) {
+  if (abs(vexRT[Ch1]) > 15) { //switch state to default
   		curState = 3;
   }
 
@@ -99,7 +99,7 @@ int lift_value;
 
 	// Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //right down trigger - forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -137,7 +137,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') {
+			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //go back from FAR to MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -148,7 +148,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { //button held
+			if (vexRT[Btn6U] == 1) { // top right trigger held - go backwards
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -185,7 +185,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') {
+			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //go forward from CLOSE TO MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
@@ -213,7 +213,7 @@ int lift_value;
 				down = 0;
 			}
 
-			if (up == 1) { //button held
+			if (up == 1) {   //left joystick UP
 				curC = true;
 
 				if (curC && !prevC) { //rising edge
@@ -251,7 +251,7 @@ int lift_value;
 					}
 			}
 
-			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') {
+			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') { //go backwards from FAR TO MIDDLE
 					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
@@ -264,7 +264,7 @@ int lift_value;
 
 
 			// left claw backward ////////////////////////////////////////////////////////////
-			if (down == 1) { //button held
+			if (down == 1) { //left trigger DOWN
 				curD = true;
 
 				if (curD && !prevD) { //rising edge
@@ -301,7 +301,7 @@ int lift_value;
 					}
 			}
 
-			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {
+			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') { //go from CLOSE TO FAR
 					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
@@ -325,7 +325,7 @@ int lift_value;
 
 	curState = 2;
 
-   if (abs(vexRT[Ch3]) > 15) {
+   if (abs(vexRT[Ch3]) > 15) { //left joystick moves - switch to drive + lift
   		curState = 1;
   }
 
@@ -341,7 +341,7 @@ int lift_value;
 
 		 // Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -379,7 +379,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') {
+			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //move back from FAR TO MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -398,7 +398,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
-						motor[right_claw_port] = 100;
+						motor[right_claw_port] = 100; //move back
 						posR = 'G';
 				} else {
 						motor[right_claw_port] = 0;
@@ -427,7 +427,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') {
+			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
@@ -461,7 +461,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = -100;
+						motor[left_claw_port] = -100; //move forward
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -491,7 +491,7 @@ int lift_value;
 					}
 			}
 
-			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') {
+			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') { //move back from FAR TO MIDDLE
 					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
@@ -512,7 +512,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = 100;
+						motor[left_claw_port] = 100; //move back
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -541,7 +541,7 @@ int lift_value;
 					}
 			}
 
-			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {
+			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') { //move forward from CLOSE TO MIDDLE
 					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
@@ -580,7 +580,7 @@ int lift_value;
 				right = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
+			if (vexRT[Ch1] < -15) {
 				left = 1;
 			} else {
 				left = 0;
@@ -597,7 +597,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_FR_SWITCH] == 1) { //not at limit
-						motor[right_claw_port] = -100;
+						motor[right_claw_port] = -100; //move forward
 						posR = 'G';
 				} else {
 						motor[right_claw_port] = 0;
@@ -627,7 +627,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') {
+			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //move back from FAR TO MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -646,7 +646,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
-						motor[right_claw_port] = 100;
+						motor[right_claw_port] = 100; //move back
 						posR = 'G';
 				} else {
 						motor[right_claw_port] = 0;
@@ -675,7 +675,7 @@ int lift_value;
 					}
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') {
+			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE TO MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;

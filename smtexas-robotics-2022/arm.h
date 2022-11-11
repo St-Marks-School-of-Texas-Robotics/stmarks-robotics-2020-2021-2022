@@ -27,13 +27,13 @@ void drop_arm(Controller *c, int arm_port) {
 	//		int pole_port: light pole servo port number
 
 	// reset button state when button is released
-	if (!c->btn7.right) {	// right pad right button
+	if (!c->btn8.up) {	// right pad right button
 		arm_drop_pressed = false; // reset state to false
 	}
 
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
-	if (c->btn7.right  && arm_drop_pressed == false) {
+	if (c->btn8.up  && arm_drop_pressed == false) {
 		arm_postion = !arm_postion; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		arm_drop_pressed = true; // set state to true to not call function until after another button release

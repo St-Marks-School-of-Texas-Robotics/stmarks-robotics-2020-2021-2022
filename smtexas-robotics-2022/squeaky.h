@@ -79,6 +79,7 @@ int lift_value;
   {
   case 1: //drive + lift
 
+	curState = 1;
   if (abs(vexRT[Ch1]) > 15) {
   		curState = 3;
   }
@@ -322,6 +323,7 @@ int lift_value;
 
    case 2: //turn + lift
 
+	curState = 2;
 
    if (abs(vexRT[Ch3]) > 15) {
   		curState = 1;
@@ -559,6 +561,7 @@ int lift_value;
 
   default: //drive + turn
 
+	curState = 3;
 
   if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
   		curState = 2;

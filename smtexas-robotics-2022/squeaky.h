@@ -82,11 +82,11 @@ int lift_value;
 	curState = 1;
 
 
-   if (abs(vexRT[Ch1]) > 15) { //switch state to default
+   if (abs(vexRT[Ch1]) > 25) { //switch state to default
   		curState = 3;
 
 		for (int i=0; i<3; i++){
-        	sendChar(UART1, 0x3C);
+        	sendChar(UART1, 0x55);
       	}
 
   	}
@@ -198,13 +198,13 @@ int lift_value;
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] > 15) {
+			if (vexRT[Ch3] > 25) {
 				up = 1;
 			} else {
 				up = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
+			if (vexRT[Ch3] < -25) {
 				down = 1;
 			} else {
 				down = 0;
@@ -327,10 +327,10 @@ int lift_value;
 
 
 
- 		if (abs(vexRT[Ch3]) > 15) { //left joystick moves - switch to drive + lift
+ 		if (abs(vexRT[Ch3]) > 25) { //left joystick moves - switch to drive + lift
   			curState = 1;
 			for (int i=0; i<3; i++){
-        		sendChar(UART1, 0x66);
+        		sendChar(UART1, 0x5A);
      		}
   		}
 
@@ -437,13 +437,13 @@ int lift_value;
 ////////////////////////////////////////////////////////////////////////////////////////////turn left claw
 
 
-			if (vexRT[Ch1] > 15) {
+			if (vexRT[Ch1] > 25) {
 				right = 1;
 			} else {
 				right = 0;
 			}
 
-			if (vexRT[Ch1] < -15) {
+			if (vexRT[Ch1] < -25) {
 				left = 1;
 			} else {
 				left = 0;
@@ -566,17 +566,17 @@ int lift_value;
 
 		for (int i=0; i<3; i++)
       	{
-        sendChar(UART1, 0x33);
+        sendChar(UART1, 0xCC);
       	}  
   }
 
-     if (vexRT[Ch1] > 15) {
+     if (vexRT[Ch1] > 25) {
 				right = 1;
 			} else {
 				right = 0;
 			}
 
-			if (vexRT[Ch1] < -15) {
+			if (vexRT[Ch1] < -25) {
 				left = 1;
 			} else {
 				left = 0;
@@ -687,13 +687,13 @@ int lift_value;
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] > 15) {
+			if (vexRT[Ch3] > 25) {
 				up = 1;
 			} else {
 				up = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
+			if (vexRT[Ch3] < -25) {
 				down = 1;
 			} else {
 				down = 0;

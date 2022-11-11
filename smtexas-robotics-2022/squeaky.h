@@ -9,6 +9,9 @@ Non-Generic Code
 int curState = 0;
 int prevState = 0;
 
+bool curSlow = false;
+bool prevSlow = false;
+
 bool curA = false;
 bool prevA = false;
 bool curB = false;
@@ -37,14 +40,27 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	//bad ir code
 int lift_value;
 
-	if (c->btn6.up) {
-		lift_value = -1;
+	if (c->btn5.up) {
+		curSlow = true;
+		
+		if (curSlow && !prevSlow) { //rising edge
+			for (int i = 0; i < 3; i++) {
+				sendChar(UART1, 0x99); //drive to LOW
+			}
+			
+		}
+
+	} 
+
+	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
+		for (int i = 0; i < 3; i++) {
+			sendChar(UART1, 0xA5); //drive to medium
+		}			
 	}
-	else if (c->btn6.down) {
-		lift_value = 1;
-	} else {
-		lift_value = 0;
-	}
+
+	prevSlow = curSlow;
+	
+
 
 
 

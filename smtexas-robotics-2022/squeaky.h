@@ -45,7 +45,8 @@ int lift_value;
 
 		if (curSlow && !prevSlow) { //rising edge
 			for (int i = 0; i < 3; i++) {
-				sendChar(UART1, 0x99); //drive to LOW
+				//sendChar(UART1, 0x99); //drive to LOW
+				sendChar(UART1, 0xC3); //drive to LOW
 			}
 
 		}

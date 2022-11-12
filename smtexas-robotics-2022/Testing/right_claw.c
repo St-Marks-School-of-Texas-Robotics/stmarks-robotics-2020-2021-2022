@@ -86,28 +86,33 @@ task main()
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
-					//clearTimer(T1);
+					clearTimer(T3);
 				}
-
+				
 				if (SensorValue[CLAW_BR_SWITCH] == 1) { //not at limit
-						motor[RIGHT_CLAW_MOTOR] = 100;
-						posR = 'G';
-				} else {
+						if (time1[T3] < 400) {
+							motor[RIGHT_CLAW_MOTOR] = 100;
+							posR = 'G';
+						}
+						
+				} /* else {
 						motor[RIGHT_CLAW_MOTOR] = 0;
 						posR = 'C';
-				}
+				}*/
 
 			} else { //button not held
 				curB = false;
 			}
 
-			if (SensorValue[CLAW_BR_SWITCH] == 0 && posR == 'G') { //falling edge RUNS ONCE
+/*
+			if (SensorValue[CLAW_BR_SWITCH] == 0 && posR == 'G') { //Hits switch when moving towards
 
 							posR = 'M';
 							prevPosR = 'C';
 							clearTimer(T3);
 
 			}
+*/
 
 
 

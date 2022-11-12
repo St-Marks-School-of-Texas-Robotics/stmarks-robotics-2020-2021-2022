@@ -100,11 +100,11 @@ int lift_value;
 	curState = 1;
 
 
-   if (abs(vexRT[Ch1]) > 25) { //switch state to default
+   if (abs(vexRT[Ch1]) > 25) { //switch state to default (drive + turn)
   		curState = 3;
 
 		for (int i=0; i<3; i++){
-        	sendChar(UART1, 0x55);
+        	sendChar(UART1, 0x3C);
       	}
 
   	}
@@ -348,7 +348,7 @@ int lift_value;
  		if (abs(vexRT[Ch3]) > 25) { //left joystick moves - switch to drive + lift
   			curState = 1;
 			for (int i=0; i<3; i++){
-        		sendChar(UART1, 0x5A);
+        		sendChar(UART1, 0x66);
      		}
   		}
 
@@ -584,7 +584,7 @@ int lift_value;
 
 		for (int i=0; i<3; i++)
       	{
-        sendChar(UART1, 0xCC);
+        sendChar(UART1, 0x33); //switch to turn + lift
       	}
   }
 

@@ -9,6 +9,9 @@ Non-Generic Code
 int curState = 0;
 int prevState = 0;
 
+bool curSlow = false;
+bool prevSlow = false;
+
 bool curA = false;
 bool prevA = false;
 bool curB = false;
@@ -37,14 +40,29 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	//bad ir code
 int lift_value;
 
-	if (c->btn6.up) {
-		lift_value = -1;
+	if (c->btn5.up) {
+		curSlow = true;
+
+		if (curSlow && !prevSlow) { //rising edge
+			for (int i = 0; i < 3; i++) {
+				sendChar(UART1, 0x99); //drive to LOW
+			}
+
+		}
+
+	} else { //button not held
+				curSlow = false;
+		}
+
+	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
+		for (int i = 0; i < 3; i++) {
+			sendChar(UART1, 0xA5); //drive to medium
+		}
 	}
-	else if (c->btn6.down) {
-		lift_value = 1;
-	} else {
-		lift_value = 0;
-	}
+
+	prevSlow = curSlow;
+
+
 
 
 
@@ -82,11 +100,11 @@ int lift_value;
 	curState = 1;
 
 
-   if (abs(vexRT[Ch1]) > 15) { //switch state to default
+   if (abs(vexRT[Ch1]) > 25) { //switch state to default
   		curState = 3;
 
 		for (int i=0; i<3; i++){
-        	sendChar(UART1, 0x3C);
+        	sendChar(UART1, 0x55);
       	}
 
   	}
@@ -96,7 +114,7 @@ int lift_value;
 
 	// Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //right down trigger - forward
+			if (vexRT[Btn6U] == 1) { //right down trigger - forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -145,7 +163,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { // top right trigger held - go backwards
+			if (vexRT[Btn6D] == 1) { // top right trigger held - go backwards
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -198,13 +216,13 @@ int lift_value;
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] > 15) {
+			if (vexRT[Ch3] > 25) {
 				up = 1;
 			} else {
 				up = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
+			if (vexRT[Ch3] < -25) {
 				down = 1;
 			} else {
 				down = 0;
@@ -327,17 +345,17 @@ int lift_value;
 
 
 
- 		if (abs(vexRT[Ch3]) > 15) { //left joystick moves - switch to drive + lift
+ 		if (abs(vexRT[Ch3]) > 25) { //left joystick moves - switch to drive + lift
   			curState = 1;
 			for (int i=0; i<3; i++){
-        		sendChar(UART1, 0x66);
+        		sendChar(UART1, 0x5A);
      		}
   		}
 
 
 		 // Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			if (vexRT[Btn6U] == 1) { //button down held MOVE Forward
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -386,7 +404,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //button held
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -437,19 +455,19 @@ int lift_value;
 ////////////////////////////////////////////////////////////////////////////////////////////turn left claw
 
 
-			if (vexRT[Ch1] > 15) {
+			if (vexRT[Ch1] > 25) {
 				right = 1;
 			} else {
 				right = 0;
 			}
 
-			if (vexRT[Ch1] < -15) {
+			if (vexRT[Ch1] < -25) {
 				left = 1;
 			} else {
 				left = 0;
 			}
 
-			if (right == 1) { //button held
+			if (left == 1) { //button held
 				curC = true;
 
 				if (curC && !prevC) { //rising edge
@@ -500,7 +518,7 @@ int lift_value;
 
 
 			// left claw backward ////////////////////////////////////////////////////////////
-			if (left == 1) { //button held
+			if (right == 1) { //button held
 				curD = true;
 
 				if (curD && !prevD) { //rising edge
@@ -566,17 +584,17 @@ int lift_value;
 
 		for (int i=0; i<3; i++)
       	{
-        sendChar(UART1, 0x33);
-      	}  
+        sendChar(UART1, 0xCC);
+      	}
   }
 
-     if (vexRT[Ch1] > 15) {
+     if (vexRT[Ch1] > 25) {
 				right = 1;
 			} else {
 				right = 0;
 			}
 
-			if (vexRT[Ch1] < -15) {
+			if (vexRT[Ch1] < -25) {
 				left = 1;
 			} else {
 				left = 0;
@@ -585,7 +603,7 @@ int lift_value;
 	// Right claw forward
 
 
-			if (right == 1) { //button held
+			if (left == 1) { //button held
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -634,7 +652,7 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (left == 1) { //button held
+			if (right == 1) { //button held
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -687,13 +705,13 @@ int lift_value;
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			if (vexRT[Ch3] > 15) {
+			if (vexRT[Ch3] > 25) {
 				up = 1;
 			} else {
 				up = 0;
 			}
 
-			if (vexRT[Ch3] < -15) {
+			if (vexRT[Ch3] < -25) {
 				down = 1;
 			} else {
 				down = 0;

@@ -43,13 +43,13 @@ void drop_arm(Controller *c, int arm_port1, int arm_port2) {
 	// set the servo value according to the hole number
 	switch (arm_postion) {
 		case false: // close position
-			motor[arm_port1] = 0;
-			//motor[arm_port2] = 0;
+			motor[arm_port1] = -120;
+			motor[arm_port2] = -120;
 			break;
 
 		case true: // open position
-			motor[arm_port1] = 70;
-			//motor[arm_port2] = 70;
+			motor[arm_port1] = 128;
+			motor[arm_port2] = 40;
 			break;
 		}
 

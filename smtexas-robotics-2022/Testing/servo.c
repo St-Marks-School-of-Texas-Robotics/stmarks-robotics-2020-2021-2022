@@ -30,13 +30,13 @@ task main()
 
   writeDebugStreamLine("testing started");
 
-  for(int i=-300; i<300; i+=10)     /* Starting 'i' at -117, and incrementing by 10, */
+  for(int i=-150; i<150; i+=10)     /* Starting 'i' at -117, and incrementing by 10, */
     {                                 /* continue while 'i' is less than 0. */
       motor[servoMotor2] = i;          // Set 'servoMotor' to position 'i'.
 
     	//setServoTarget(servoMotor2) = i;
     	writeDebugStreamLine("%d position", i);
-      wait1Msec(1000);                 // Wait for 0.25 seconds (gives time for the servo to move)
+      wait1Msec(200);                 // Wait for 0.25 seconds (gives time for the servo to move)
     }
 
     //motor[servoMotor] = -128;       // Set 'servoMotor' to position -127 (negative end of range)

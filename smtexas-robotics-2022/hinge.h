@@ -14,24 +14,13 @@ bool hinge_postion = false;
 //false when not pressed, true when pressed
 bool hinge_drop_pressed = false; // right pad right button
 
-
-
 // control motor to drop light pole
 void close_hinge(Controller *c, int hinge_port) {
-	// drops light poles
-	// right pad right button to drop next lightpole
-	// right pad bottom button to go back to previous slot
-	//
-	// PARAMS
-	// 		Controller *c: Controller object to retrieve input values
-	//		int pole_port: light pole servo port number
 
-	// reset button state when button is released
 	if (!c->btn8.right) {	// right pad right button
 		hinge_drop_pressed = false; // reset state to false
 	}
 
-	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
 	if (c->btn8.right  && hinge_drop_pressed == false) {
 		hinge_postion = !hinge_postion; // increment flag motor allignment to num hole, avoid exceeding 3

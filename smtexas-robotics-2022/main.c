@@ -35,6 +35,7 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 #include "retract.h" //retract squeaky claws
 
+#include "armJoy.h" // battery dropper
 
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
@@ -163,7 +164,7 @@ task main(){
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
 		drop_battery(c, BATTERY_SERVO); // control light pole
-		drop_arm(c, ARM_SERVO1, ARM_SERVO2); // control light pole
+		//  drop_arm(c, ARM_SERVO1, ARM_SERVO2); // control light pole
 
 		retract_claw(c , LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR);
 

@@ -13,8 +13,10 @@ bool is_squeaky = false;
 //false when not pressed, true when pressed
 bool drive_switch = false; // right pad right button
 
+
+
 // drive control with x and y values
-void drive_mode(Controller *c, int left_port,  int right_port, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
+void drive_mode(Controller *c, int left_port,  int right_port, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port, int arm_port) {
 
 
 	if (!c->btn7.up) {	// right pad right button
@@ -35,6 +37,7 @@ void drive_mode(Controller *c, int left_port,  int right_port, int left_claw_por
 	switch (is_squeaky) {
 		case false: // open position
 			joystick_drive_control(c, left_port, right_port);
+			arm_joy(c, arm_port);
 			break;
 
 		case true: // close position
@@ -44,6 +47,7 @@ void drive_mode(Controller *c, int left_port,  int right_port, int left_claw_por
 
 
 }
+
 
 
 

@@ -32,11 +32,11 @@ void close_hinge(Controller *c, int hinge_port) {
 	// set the servo value according to the hole number
 	switch (hinge_postion) {
 		case false: // open position
-			motor[hinge_port] = 0;
+			motor[hinge_port] = -200;
 			break;
 
 		case true: // close position
-			motor[hinge_port] = 107;
+			motor[hinge_port] = 150;
 			break;
 		}
 

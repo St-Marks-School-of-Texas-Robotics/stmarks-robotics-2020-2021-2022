@@ -41,12 +41,12 @@ void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 	switch (battery_postion) {
 		case false: // close position
 			motor[left_wheel] = -200;
-			motor[right_wheel] = -100;
+			motor[right_wheel] = 100;
 			break;
 
 		case true: // open position
 			motor[left_wheel] = 80;
-			motor[right_wheel] = 100;
+			motor[right_wheel] = -100;
 			break;
 		}
 

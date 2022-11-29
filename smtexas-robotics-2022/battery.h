@@ -40,13 +40,13 @@ void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 	// set the servo value according to the hole number
 	switch (battery_postion) {
 		case false: // close position
-			motor[left_wheel] = 30;
-			motor[right_wheel] = 30;
+			motor[left_wheel] = -200;
+			motor[right_wheel] = -100;
 			break;
 
 		case true: // open position
-			motor[left_wheel] = 130;
-			motor[right_wheel] = 130;
+			motor[left_wheel] = 80;
+			motor[right_wheel] = 100;
 			break;
 		}
 

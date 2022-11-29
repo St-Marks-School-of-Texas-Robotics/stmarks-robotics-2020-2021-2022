@@ -237,7 +237,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = -100;
+						motor[left_claw_port] = 100;
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -268,7 +268,7 @@ int lift_value;
 			}
 
 			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') { //go backwards from FAR TO MIDDLE
-					motor[left_claw_port] = 100;
+					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
 					posL = NULL;
@@ -288,7 +288,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = 100;
+						motor[left_claw_port] = -100;
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -318,7 +318,7 @@ int lift_value;
 			}
 
 			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') { //go from CLOSE TO FAR
-					motor[left_claw_port] = -100;
+					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
 					posL = NULL;
@@ -726,7 +726,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_FL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = -100;
+						motor[left_claw_port] = 100;
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -757,7 +757,7 @@ int lift_value;
 			}
 
 			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') {
-					motor[left_claw_port] = 100;
+					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
 					posL = NULL;
@@ -777,7 +777,7 @@ int lift_value;
 				}
 
 				if (SensorValue[CLAW_BL_SWITCH] == 1) { //not at limit
-						motor[left_claw_port] = 100;
+						motor[left_claw_port] = -100;
 						posL = 'G';
 				} else {
 						motor[left_claw_port] = 0;
@@ -807,7 +807,7 @@ int lift_value;
 			}
 
 			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {
-					motor[left_claw_port] = -100;
+					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
 					posL = NULL;

@@ -7,15 +7,15 @@ Non-Generic Code
 #define ARMJOY_H
 
 
-int armPos = 0; //default position
-int armHigh = -70; //low position
-int armLow = 150; //high position
+float armPos = 0; //default position
+int armHigh = -100; //low position
+int armLow = -15; //high position
 // control motor to drop light pole
 void arm_joy(Controller *c, int arm_port1) {
-		if (vexRT[Ch2] >= 15) {
-  			armPos --;	// move up
-  	} else if (vexRT[Ch2] <= -15) {
-  			armPos ++;	// move down
+		if (vexRT[Ch2] >= 45) {
+  			armPos -= .02;	// move up
+  	} else if (vexRT[Ch2] <= -45) {
+  			armPos += .02;	// move down
   	}
 
   	if (armPos < armHigh){

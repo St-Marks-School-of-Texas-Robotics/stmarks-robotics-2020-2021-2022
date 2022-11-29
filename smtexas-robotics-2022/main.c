@@ -45,9 +45,10 @@ or contact Isaac Song at isaacsong03@gmail.com
 #define LEFT_CLAW_MOTOR port4
 #define RIGHT_CLAW_MOTOR port5
 #define HINGE_SERVO port6
-#define BATTERY_SERVO port7
-#define ARM_SERVO1 port8
-#define ARM_SERVO2 port9
+#define WHEEL_SERVO1 port7 //left
+#define WHEEL_SERVO2 port8 //right
+#define ARM_SERVO1 port9
+
 
 
 
@@ -165,7 +166,7 @@ task main(){
 	  update_controller(c); // continuously update controller value
 		movement(c, LEFT_MOTOR, RIGHT_MOTOR); // base robot movement
 		close_hinge(c, HINGE_SERVO); // control light pole
-		drop_battery(c, BATTERY_SERVO); // control light pole
+		drop_battery(c, WHEEL_SERVO1, WHEEL_SERVO2); // control light pole
 		//  drop_arm(c, ARM_SERVO1, ARM_SERVO2); // control light pole
 
 		// retract_claw(c , LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR);

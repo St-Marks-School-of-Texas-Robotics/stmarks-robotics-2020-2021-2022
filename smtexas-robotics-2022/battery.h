@@ -14,7 +14,7 @@ bool battery_drop_pressed = false; // right pad right button
 
 
 // control motor to drop light pole
-void drop_battery(Controller *c, int battery_port) {
+void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 	// drops light poles
 	// right pad right button to drop next lightpole
 	// right pad bottom button to go back to previous slot
@@ -40,11 +40,13 @@ void drop_battery(Controller *c, int battery_port) {
 	// set the servo value according to the hole number
 	switch (battery_postion) {
 		case false: // close position
-			motor[battery_port] = 30;
+			motor[left_wheel] = 30;
+			motor[right_wheel] = 30;
 			break;
 
 		case true: // open position
-			motor[battery_port] = 130;
+			motor[left_wheel] = 130;
+			motor[right_wheel] = 130;
 			break;
 		}
 

@@ -8,19 +8,19 @@ Non-Generic Code
 
 
 int armPos = 0; //default position
-int armHigh = 0; //low position
-int armLow = 0; //high position
+int armHigh = -70; //low position
+int armLow = 150; //high position
 // control motor to drop light pole
 void arm_joy(Controller *c, int arm_port1) {
 		if (vexRT[Ch2] >= 15) {
-  			armPos ++;	// move up
+  			armPos --;	// move up
   	} else if (vexRT[Ch2] <= -15) {
-  			armPos --;	// move down
+  			armPos ++;	// move down
   	}
 
-  	if (armPos > armHigh){
+  	if (armPos < armHigh){
   		armPos = armHigh;
-  	} else if (armPos < armLow){
+  	} else if (armPos > armLow){
   		armPos = armLow;
   	}
 

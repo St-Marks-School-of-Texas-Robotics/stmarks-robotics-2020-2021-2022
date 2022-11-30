@@ -36,6 +36,8 @@ char posL = NULL;
 char prevPosL = NULL;
 bool slowL = false;
 
+int irNum = 5;
+
 void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
 
@@ -43,7 +45,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 		curSlow = true;
 
 		if (curSlow && !prevSlow) { //rising edge
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < irNum; i++) {
 				sendChar(UART1, 0x99); //drive to LOW
 				sendChar(UART1, 0x69); //rotation to LOW
 
@@ -57,7 +59,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 		}
 
 	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < irNum; i++) {
 			sendChar(UART1, 0xA5); //drive to medium
 			sendChar(UART1, 0x96); //rotation to medium
 		}
@@ -106,7 +108,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
    if (abs(vexRT[Ch1]) > 25) { //switch state to default (drive + turn)
   		curState = 3;
 
-		for (int i=0; i<3; i++){
+		for (int i=0; i<irNum; i++){
         	sendChar(UART1, 0x3C);
       	}
 
@@ -382,7 +384,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
  		if (abs(vexRT[Ch3]) > 25) { //left joystick moves - switch to drive + lift
   			curState = 1;
-			for (int i=0; i<3; i++){
+			for (int i=0; i<irNum; i++){
         		sendChar(UART1, 0x66);
      		}
   		}
@@ -648,7 +650,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
    if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
   		curState = 2;
 
-		for (int i=0; i<3; i++)
+		for (int i=0; i<irNum; i++)
       	{
         sendChar(UART1, 0x33); //switch to turn + lift
       	}

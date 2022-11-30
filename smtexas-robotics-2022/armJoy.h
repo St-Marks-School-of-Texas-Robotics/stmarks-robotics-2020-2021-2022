@@ -8,8 +8,8 @@ Non-Generic Code
 
 
 float armPos = 0; //default position
-int armHigh = -100; //low position
-int armLow = -15; //high position
+int armHigh = -65; //low position
+int armLow = 140; //high position
 float slowMulti = 1;
 
 // control motor to drop light pole
@@ -24,9 +24,9 @@ void arm_joy(Controller *c, int arm_port1) {
 
 
 	if (vexRT[Ch2] >= 45) {
-  			armPos -= .05 * slowMulti;	// move up
+  			armPos -= .07 * slowMulti;	// move up
   	} else if (vexRT[Ch2] <= -45) {
-  			armPos += .05 * slowMulti;	// move down
+  			armPos += .07 * slowMulti;	// move down
   	}
 
   	if (armPos < armHigh){

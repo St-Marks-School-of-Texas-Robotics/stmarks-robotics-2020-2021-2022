@@ -30,7 +30,7 @@ task main()
 
   writeDebugStreamLine("testing started");
 
-  for(int i=-100; i<-15; i+=5)     /* Starting 'i' at -117, and incrementing by 10, */
+  for(int i=-65; i<150; i+=5)     /* Starting 'i' at -117, and incrementing by 10, */
     {                                 /* continue while 'i' is less than 0. */
       motor[servoMotor2] = i;          // Set 'servoMotor' to position 'i'.
 

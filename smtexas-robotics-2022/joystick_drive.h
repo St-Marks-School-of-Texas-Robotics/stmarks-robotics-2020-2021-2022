@@ -24,6 +24,12 @@ bool reverse = true;
 bool reverse_pressed = false; // right pad right button
 
 
+bool cur1 = false;
+bool prev1 = false;
+bool cur2 = false;
+bool prev2 = false;
+
+
 // drive control with x and y values
 void joystick_drive(Controller *c, float x, float y, int left_port, int right_port) {
 	// move robot with magnitude and direction from x and y value of joystick
@@ -76,8 +82,8 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 
 
 
-
-  if (!c->btn7.down) {	// left pad down button
+/*
+  if ((!c->btn7.down) || (!c->btn8.up)) {	// left pad down button
 		reverse_pressed = false; // reset state to false
 	}
 
@@ -88,20 +94,65 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 
 		reverse_pressed = true; // set state to true to not call function until after another button release
 	}
+	*/
+
+
+
+
+
+
+	//reverse code
+		if (vexRT[Btn7D] == 1) { //Field Specific FIX BEFORE COMP
+
+				cur1 = true;
+
+			} else { //button not held
+				cur1 = false;
+			}
+
+		if (vexRT[Btn8U] == 1) { //Field Specific FIX BEFORE COMP
+
+				cur2 = true;
+
+			} else { //button not held
+				cur2 = false;
+			}
 
 
 	// set the servo value according to the hole number
 	switch (reverse) {
 		case false: // open position
+				if(cur1 && !prev1) {
+					reverse = true;
+					prev1 = true;
+				}
+				if(cur2 && !prev2) {
+					reverse = true;
+					prev2 = true;
+				}
+
 			  motor[left_port] = left_motor_final;
   			motor[right_port] = right_motor_final;
 			break;
 
 		case true: // close position
+
+				if(cur1 && !prev1) {
+					reverse = false;
+					prev1 = true;
+				}
+				if(cur2 && !prev2) {
+					reverse = false;
+					prev2 = true;
+				}
+
 			  motor[left_port] = -right_motor_final;
   			motor[right_port] = -left_motor_final;
 			break;
 		}
+
+		prev1 = cur1;
+		prev2 = cur2;
 
 
 }

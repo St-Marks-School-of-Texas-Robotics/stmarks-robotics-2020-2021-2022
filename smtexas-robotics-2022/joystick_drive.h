@@ -83,7 +83,7 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
-	if (c->btn7.down  && reverse_pressed == false) {
+	if ((c->btn7.down || c->btn8.up)  && reverse_pressed == false) {
 		reverse = !reverse; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		reverse_pressed = true; // set state to true to not call function until after another button release

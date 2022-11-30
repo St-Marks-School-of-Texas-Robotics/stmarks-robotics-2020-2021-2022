@@ -176,7 +176,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 			// Right claw backward ////////////////////////////////////////////////////////////
 			//if (vexRT[Btn6U] == 1) { //button held
-			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
+			if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
 				curB = true;
 
 				if (curB && !prevB) { //rising edge

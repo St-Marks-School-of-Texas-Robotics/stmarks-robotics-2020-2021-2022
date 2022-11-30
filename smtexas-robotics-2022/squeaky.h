@@ -39,10 +39,6 @@ bool slowL = false;
 void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
 
-
-	//bad ir code
-int lift_value;
-
 	if (c->btn5.up) {
 		curSlow = true;
 
@@ -121,7 +117,9 @@ int lift_value;
 
 	// Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			//if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
+
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -177,7 +175,8 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { //button held
+			//if (vexRT[Btn6U] == 1) { //button held
+			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -391,7 +390,8 @@ int lift_value;
 
 		 // Right claw forward
 
-			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			//if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -447,7 +447,8 @@ int lift_value;
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			if (vexRT[Btn6U] == 1) { //button held
+			//if (vexRT[Btn6U] == 1) { //button held
+			if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
 				curB = true;
 
 				if (curB && !prevB) { //rising edge

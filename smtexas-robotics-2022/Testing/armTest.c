@@ -35,7 +35,7 @@ task main()
   		}
   		motor[servoMotor1] = armPos;
 
-  		time1[timer1]
+
 
   		test += .001;
 

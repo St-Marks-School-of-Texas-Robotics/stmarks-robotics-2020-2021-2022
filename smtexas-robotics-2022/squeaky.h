@@ -105,7 +105,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	curState = 1;
 
 
-   if (abs(vexRT[Ch1]) > 25) { //switch state to default (drive + turn)
+   if (abs(vexRT[Ch1]) > 45) { //switch state to default (drive + turn)
   		curState = 3;
 
 		for (int i=0; i<irNum; i++){
@@ -382,7 +382,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 
- 		if (abs(vexRT[Ch3]) > 25) { //left joystick moves - switch to drive + lift
+ 		if (abs(vexRT[Ch3]) > 45) { //left joystick moves - switch to drive + lift
   			curState = 1;
 			for (int i=0; i<irNum; i++){
         		sendChar(UART1, 0x66);

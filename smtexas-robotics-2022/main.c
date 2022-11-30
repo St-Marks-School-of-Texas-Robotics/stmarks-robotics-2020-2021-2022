@@ -169,7 +169,7 @@ task main(){
 		drop_battery(c, WHEEL_SERVO1, WHEEL_SERVO2); // control light pole
 		//  drop_arm(c, ARM_SERVO1, ARM_SERVO2); // control light pole
 
-		// retract_claw(c , LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR);
+		 retract_claw(c , LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR);
 
 
 		//move_claw(c, LEFT_CLAW_MOTOR, RIGHT_CLAW_MOTOR, CLAW_FL_SWITCH, CLAW_BL_SWITCH, CLAW_FR_SWITCH, CLAW_BR_SWITCH); // claw movement

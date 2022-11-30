@@ -52,7 +52,7 @@ void retract_claw(Controller *c, int left_claw, int right_claw) {
 
 			if ( (SensorValue[CLAW_BL_SWITCH] == 1) && (time1[T2] < 3500) ) {   //left claw back
 
-				motor[left_claw] = 50;
+				motor[left_claw] = -50;
 
 			} else {
 				motor[left_claw] = 0;

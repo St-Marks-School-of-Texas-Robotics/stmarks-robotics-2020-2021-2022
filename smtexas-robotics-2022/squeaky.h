@@ -48,8 +48,10 @@ int lift_value;
 
 		if (curSlow && !prevSlow) { //rising edge
 			for (int i = 0; i < 3; i++) {
-				//sendChar(UART1, 0x99); //drive to LOW
-				sendChar(UART1, 0xC3); //drive to LOW
+				sendChar(UART1, 0x99); //drive to LOW
+				sendChar(UART1, 0x69); //rotation to LOW
+
+				//sendChar(UART1, 0xC3); //drive to High
 			}
 
 		}
@@ -61,6 +63,7 @@ int lift_value;
 	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
 		for (int i = 0; i < 3; i++) {
 			sendChar(UART1, 0xA5); //drive to medium
+			sendChar(UART1, 0x96); //rotation to medium
 		}
 	}
 

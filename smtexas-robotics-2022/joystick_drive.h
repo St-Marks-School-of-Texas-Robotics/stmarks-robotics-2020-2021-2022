@@ -17,7 +17,7 @@ Generic Code
 
 // STATES
 //int hinge_position = 0; // hole 0 is no hole
-bool reverse = false;
+bool reverse = true;
 
 // state tracker to only call button function once when pressed
 //false when not pressed, true when pressed

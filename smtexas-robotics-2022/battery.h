@@ -25,7 +25,7 @@ void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 	// PARAMS
 	// 		Controller *c: Controller object to retrieve input values
 	//		int pole_port: light pole servo port number
-/*
+
 	// reset button state when button is released
 	if (!c->btn8.down) {	// right pad right button
 		battery_drop_pressed = false; // reset state to false
@@ -38,13 +38,16 @@ void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 
 		battery_drop_pressed = true; // set state to true to not call function until after another button release
 	}
-*/
+
+/*
 	if (c->btn8.down)
 	{
 		curW = true;
+	} else {
+		curW = false;
 	}
-	
-	
+*/
+
 
 
 	// set the servo value according to the hole number
@@ -52,29 +55,29 @@ void drop_battery(Controller *c, int left_wheel, int right_wheel) {
 		case false: // close position
 			motor[left_wheel] = -200;
 			motor[right_wheel] = 100;
-
+/*
 			if (curW && !prevW)
 			{
 				clearTimer(T1);
-				
-			} else if (curW && time1[T1] < 1000)
+
+			} else if (curW && time1[T1] > 1000)
 			{
 				battery_postion = true;
 				break;
 			}
-			
+*/
 			break;
 
 		case true: // open position
 			motor[left_wheel] = 80;
 			motor[right_wheel] = -100;
-
+/*
 			if (curW && !prevW)
 			{
 				battery_postion = false;
-				
-			} 
-
+				curW = false;
+			}
+*/
 			break;
 		}
 

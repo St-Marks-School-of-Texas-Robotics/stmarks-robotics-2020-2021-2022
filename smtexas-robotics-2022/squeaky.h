@@ -113,7 +113,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 				curState = 2;
 
 				for (int i=0; i<irNum; i++){
-        			sendChar(UART1, 0x66); // drive + lift
+        			sendChar(UART1, 0x33); // rotate + lift
       			}
 
 				break;
@@ -121,7 +121,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 				curState = 3;
 
 				for (int i=0; i<irNum; i++){
-					sendChar(UART1, 0x3C);
+					sendChar(UART1, 0x3C); //drive + turn
 				}
 				break;
 			}
@@ -404,19 +404,19 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 				
 
 
-				if (abs(vexRT[Ch1]) > 45) //if lift bypass to drive + Rotate
+				if (abs(vexRT[Ch1]) > 45) //if rotate bypass to drive + Rotate
 				{
 					curState = 3;
 
 					for (int i=0; i<irNum; i++){
-						sendChar(UART1, 0x3C); // drive + lift
+						sendChar(UART1, 0x3C); // drive + rotate
 					}
 
 					break;
 				} else {
 					curState = 1;
 					for (int i=0; i<irNum; i++){
-						sendChar(UART1, 0x66);
+						sendChar(UART1, 0x66); // drive + lift
 					}
 					break;
 				}

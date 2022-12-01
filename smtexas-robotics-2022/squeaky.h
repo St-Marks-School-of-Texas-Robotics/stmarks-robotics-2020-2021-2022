@@ -10,7 +10,7 @@ int curState = 0;
 int prevState = 0;
 
 bool curSlow = false;
-bool prevSlow = false;
+bool prevSlow = true;
 
 bool curFast = false;
 bool prevFast = false;

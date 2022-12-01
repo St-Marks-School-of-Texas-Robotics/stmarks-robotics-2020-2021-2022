@@ -16,7 +16,7 @@ float slowMulti = 1;
 void arm_joy(Controller *c, int arm_port1) {
 
 	if (c->btn5.up) {
-		slowMulti = 0.25;
+		slowMulti = 0.5;
 	} else {
 		slowMulti = 1;
 	}
@@ -24,9 +24,9 @@ void arm_joy(Controller *c, int arm_port1) {
 
 
 	if (vexRT[Ch2] >= 45) {
-  			armPos -= .07 * slowMulti;	// move up
+  			armPos -= .1 * slowMulti;	// move up
   	} else if (vexRT[Ch2] <= -45) {
-  			armPos += .07 * slowMulti;	// move down
+  			armPos += .1 * slowMulti;	// move down
   	}
 
   	if (armPos < armHigh){

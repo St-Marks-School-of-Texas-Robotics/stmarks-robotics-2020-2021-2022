@@ -82,24 +82,24 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 
 
 
-/*
-  if ((!c->btn7.down) || (!c->btn8.up)) {	// left pad down button
+
+  if (!c->btn8.up) {	// left pad down button
 		reverse_pressed = false; // reset state to false
 	}
 
 	// rotate to next hole when button pressed for first time after release
 	// 		right pad right button
-	if ((c->btn7.down || c->btn8.up)  && reverse_pressed == false) {
+	if (c->btn8.up  && reverse_pressed == false) {
 		reverse = !reverse; // increment flag motor allignment to num hole, avoid exceeding 3
 
 		reverse_pressed = true; // set state to true to not call function until after another button release
 	}
-	*/
+	
 
 
 
 
-
+/*
 
 	//reverse code
 		if (vexRT[Btn7D] == 1) { //Field Specific FIX BEFORE COMP
@@ -117,37 +117,37 @@ void joystick_drive(Controller *c, float x, float y, int left_port, int right_po
 			} else { //button not held
 				cur2 = false;
 			}
-
+*/
 
 	// set the servo value according to the hole number
 	switch (reverse) {
 		case false: // open position
-				if(cur1 && !prev1) {
-					reverse = true;
-					prev1 = true;
-				}
-				if(cur2 && !prev2) {
-					reverse = true;
-					prev2 = true;
-				}
+				// if(cur1 && !prev1) {
+				// 	reverse = true;
+				// 	prev1 = true;
+				// }
+				// if(cur2 && !prev2) {
+				// 	reverse = true;
+				// 	prev2 = true;
+				// }
 
-			  motor[left_port] = left_motor_final;
+			motor[left_port] = left_motor_final;
   			motor[right_port] = right_motor_final;
 			break;
 
 		case true: // close position
 
-				if(cur1 && !prev1) {
-					reverse = false;
-					prev1 = true;
-				}
-				if(cur2 && !prev2) {
-					reverse = false;
-					prev2 = true;
-				}
+				// if(cur1 && !prev1) {
+				// 	reverse = false;
+				// 	prev1 = true;
+				// }
+				// if(cur2 && !prev2) {
+				// 	reverse = false;
+				// 	prev2 = true;
+				// }
 
-			  motor[left_port] = -right_motor_final;
-  			motor[right_port] = -left_motor_final;
+			  	motor[left_port] = -right_motor_final;
+  				motor[right_port] = -left_motor_final;
 			break;
 		}
 

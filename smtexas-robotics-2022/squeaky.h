@@ -106,11 +106,13 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
    if (abs(vexRT[Ch1]) > 45) { //switch state to default (drive + turn)
+     if(!((vexRT[Btn6U] == 1) && (vexRT[Btn6D] == 1) && abs(vexRT[Ch3]) > 45)) { //if button not pressed and drive not on
   		curState = 3;
 
-		for (int i=0; i<irNum; i++){
+				for (int i=0; i<irNum; i++){
         	sendChar(UART1, 0x3C);
       	}
+      }
 
   	}
 
@@ -383,11 +385,13 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
  		if (abs(vexRT[Ch3]) > 45) { //left joystick moves - switch to drive + lift
+ 			if(!((vexRT[Btn6U] == 1) && (vexRT[Btn6D] == 1) && abs(vexRT[Ch1]) <= 45)) { //if button not pressed and drive not on
   			curState = 1;
-			for (int i=0; i<irNum; i++){
+				for (int i=0; i<irNum; i++){
         		sendChar(UART1, 0x66);
      		}
-  		}
+     	}
+  	}
 
 
 		 // Right claw forward
@@ -648,12 +652,14 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
    if (vexRT[Btn6D] == 1 || vexRT[Btn6U] == 1) {
+     if(!(abs(vexRT[Ch1]) > 45 && abs(vexRT[Ch3]) > 45)) { //if button not pressed and drive not on
   		curState = 2;
 
-		for (int i=0; i<irNum; i++)
+			for (int i=0; i<irNum; i++)
       	{
         sendChar(UART1, 0x33); //switch to turn + lift
       	}
+      }
   }
 
      if (vexRT[Ch1] > 45) {

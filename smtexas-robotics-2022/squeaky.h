@@ -165,8 +165,8 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 	// Right claw forward
 
-			//if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
-			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
+			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			//if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
 
 				curA = true;
 
@@ -223,8 +223,8 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			//if (vexRT[Btn6U] == 1) { //button held
-			if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
+			if (vexRT[Btn6U] == 1) { //button held
+			//if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
 				curB = true;
 
 				if (curB && !prevB) { //rising edge
@@ -457,8 +457,8 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 		 // Right claw forward
 
-			//if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
-			if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
+			if (vexRT[Btn6D] == 1) { //button down held MOVE Forward
+			//if (vexRT[Btn6U] == 1) { //Field Specific FIX BEFORE COMP
 				curA = true;
 
 				if (curA && !prevA) { //rising edge
@@ -514,8 +514,8 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 
 			// Right claw backward ////////////////////////////////////////////////////////////
-			//if (vexRT[Btn6U] == 1) { //button held
-			if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
+			if (vexRT[Btn6U] == 1) { //button held
+			//if (vexRT[Btn6D] == 1) { //Field Specific FIX BEFORE COMP
 				curB = true;
 
 				if (curB && !prevB) { //rising edge

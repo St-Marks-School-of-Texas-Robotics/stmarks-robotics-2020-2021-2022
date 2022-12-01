@@ -12,6 +12,9 @@ int prevState = 0;
 bool curSlow = false;
 bool prevSlow = false;
 
+bool curFast = false;
+bool prevFast = false;
+
 bool curA = false;
 bool prevA = false;
 bool curB = false;
@@ -66,6 +69,32 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	}
 
 	prevSlow = curSlow;
+
+	if (c->btn5.down) {
+		curFast = true;
+
+		if (curFast && !prevFast) { //rising edge
+			for (int i = 0; i < irNum; i++) {
+				sendChar(UART1, 0x0F); //rotationg to High
+				
+
+				//sendChar(UART1, 0xC3); //drive to High
+			}
+
+		}
+
+	} else { //button not held
+				curFast = false;
+		}
+
+	if (!curFast && prevFast) { //falling edge RUNS ONCE
+		for (int i = 0; i < irNum; i++) {
+			sendChar(UART1, 0xA5); //drive to medium
+			sendChar(UART1, 0x96); //rotation to medium
+		}
+	}
+
+	prevFast = curFast;
 
 
 

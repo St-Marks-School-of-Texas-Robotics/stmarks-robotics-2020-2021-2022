@@ -64,12 +64,12 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 	if (!curSlow && prevSlow) { //falling edge RUNS ONCE
 		for (int i = 0; i < irNum; i++) {
 			sendChar(UART1, 0xA5); //drive to medium
-			sendChar(UART1, 0x96); //rotation to medium
+			sendChar(UART1, 0x0F); //rotation to High
 		}
 	}
 
 	prevSlow = curSlow;
-
+/*
 	if (c->btn5.down) {
 		curFast = true;
 
@@ -96,7 +96,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 
 	prevFast = curFast;
 
-
+*/
 
 
 

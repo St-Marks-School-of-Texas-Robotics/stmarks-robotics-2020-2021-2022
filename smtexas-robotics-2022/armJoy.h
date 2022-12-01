@@ -7,7 +7,7 @@ Non-Generic Code
 #define ARMJOY_H
 
 
-float armPos = 0; //default position
+float armPos = 140; //default position
 int armHigh = -65; //low position
 int armLow = 140; //high position
 float slowMulti = 1;

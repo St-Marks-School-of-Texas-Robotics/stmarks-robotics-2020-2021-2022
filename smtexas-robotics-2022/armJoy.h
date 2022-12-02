@@ -12,6 +12,8 @@ int armHigh = -65; //low position
 int armLow = 140; //high position
 float slowMulti = 1;
 
+bool once = true;
+
 // control motor to drop light pole
 void arm_joy(Controller *c, int arm_port1) {
 
@@ -19,6 +21,11 @@ void arm_joy(Controller *c, int arm_port1) {
 		slowMulti = 0.5;
 	} else {
 		slowMulti = 1;
+	}
+
+	if(c->btn8.right && once) { //box grabber pressed
+		armPos = 20; 
+		once = false;
 	}
 
 

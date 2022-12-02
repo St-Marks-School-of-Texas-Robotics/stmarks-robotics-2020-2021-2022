@@ -41,12 +41,12 @@ or contact Isaac Song at isaacsong03@gmail.com
 
 // PORTS ASSIGNMENTS
 #define LEFT_MOTOR port2
-#define RIGHT_MOTOR port3
+#define RIGHT_MOTOR port6 //6
 #define LEFT_CLAW_MOTOR port4
-#define RIGHT_CLAW_MOTOR port5
-#define HINGE_SERVO port6
+#define RIGHT_CLAW_MOTOR port8 //8
+#define HINGE_SERVO port3  //3
 #define WHEEL_SERVO1 port7 //left
-#define WHEEL_SERVO2 port8 //right
+#define WHEEL_SERVO2 port5 //right //5
 #define ARM_SERVO1 port9
 
 

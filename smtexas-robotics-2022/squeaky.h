@@ -41,6 +41,11 @@ bool slowL = false;
 
 int irNum = 7;
 
+int FMTime = 450;
+int BMTime = 400;
+
+
+
 void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int right_claw_port, int front_left_port, int back_left_port, int front_right_port, int back_right_port) {
 
 
@@ -212,7 +217,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //move back from FAR TO MIDDLE
+			if (posR == 'M' && time1[T2] < FMTime && prevPosR == 'F') { //move back from FAR TO MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -268,7 +273,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
+			if (posR == 'M' && time1[T3] < BMTime && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
@@ -343,7 +348,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') {
+			if (posL == 'M' && time1[T4] < FMTime && prevPosL == 'F') {
 					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
@@ -400,7 +405,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {
+			if (posL == 'M' && time1[T1] < BMTime && prevPosL == 'C') {
 					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
@@ -503,7 +508,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //move back from FAR TO MIDDLE
+			if (posR == 'M' && time1[T2] < FMTime && prevPosR == 'F') { //move back from FAR TO MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -559,7 +564,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
+			if (posR == 'M' && time1[T3] < BMTime && prevPosR == 'C') { //move forward from CLOSE to MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
@@ -633,7 +638,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') { //move back from FAR TO MIDDLE
+			if (posL == 'M' && time1[T4] < FMTime && prevPosL == 'F') { //move back from FAR TO MIDDLE
 					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
@@ -688,7 +693,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T1] < 400 && prevPosL == 'C') { //move forward from CLOSE TO MIDDLE
+			if (posL == 'M' && time1[T1] < BMTime && prevPosL == 'C') { //move forward from CLOSE TO MIDDLE
 					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T1] >= 400 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
@@ -801,7 +806,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T2] < 300 && prevPosR == 'F') { //move back from FAR TO MIDDLE
+			if (posR == 'M' && time1[T2] < FMTime && prevPosR == 'F') { //move back from FAR TO MIDDLE
 					motor[right_claw_port] = 100;
 			} else if (posR == 'M' && time1[T2] >= 300 && prevPosR == 'F') {
 					motor[right_claw_port] = 0;
@@ -856,7 +861,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowR = false;
 			}
 
-			if (posR == 'M' && time1[T3] < 400 && prevPosR == 'C') { //move forward from CLOSE TO MIDDLE
+			if (posR == 'M' && time1[T3] < BMTime && prevPosR == 'C') { //move forward from CLOSE TO MIDDLE
 					motor[right_claw_port] = -100;
 			} else if (posR == 'M' && time1[T3] >= 400 && prevPosR == 'C') {
 					motor[right_claw_port] = 0;
@@ -932,7 +937,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T4] < 300 && prevPosL == 'F') {
+			if (posL == 'M' && time1[T4] < FMTime && prevPosL == 'F') {
 					motor[left_claw_port] = -100;
 			} else if (posL == 'M' && time1[T4] >= 300 && prevPosL == 'F') {
 					motor[left_claw_port] = 0;
@@ -989,7 +994,7 @@ void squeaky_drive(Controller *c, float x, float y, int left_claw_port,  int rig
 					slowL = false;
 			}
 
-			if (posL == 'M' && time1[T1] < 300 && prevPosL == 'C') {
+			if (posL == 'M' && time1[T1] < BMTime && prevPosL == 'C') {
 					motor[left_claw_port] = 100;
 			} else if (posL == 'M' && time1[T1] >= 300 && prevPosL == 'C') {
 					motor[left_claw_port] = 0;
